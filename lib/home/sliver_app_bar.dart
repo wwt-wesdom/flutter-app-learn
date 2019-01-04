@@ -104,19 +104,30 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
               children: <Widget>[
 //                Text('sliverAppBar'),
                 Container(
-                  color: Colors.blue,
+                  height: 30.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    border: Border.all(
+                      width: 1.0,
+                      color: Colors.yellow
+                    ),
+                    color: Colors.blue,
+                  ),
                   child: InkWell(
                     child: Row(
+                     /* mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,*/
                       children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(right: 8.0),
+                        new Padding(
+                          padding: EdgeInsets.only(right: 8.0,left: 30.0),
                           child: Icon(
                             Icons.search,
                             color: Colors.white,
                             size: 20.0,
                           ),
                         ),
-                        Expanded(
+                        new Text('search category',style: TextStyle(fontSize: 14.0),),
+                       /* new Expanded(
                             child: TextField(
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
@@ -124,9 +135,12 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                                   hintText: 'Search category',
                                   hintStyle: TextStyle(color: Colors.white)),
                               cursorColor: Colors.white,
-                        ))
+                        ))*/
                       ],
                     ),
+                    onTap: (){
+                      print('asdflasd');
+                    },
                   ),
                 )
               ],

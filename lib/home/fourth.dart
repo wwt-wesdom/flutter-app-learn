@@ -50,6 +50,7 @@ class _FourthState extends State<Fourth> {
         actions: <Widget>[
           FlatButton(onPressed: (){
             saveImage();
+            Navigator.of(context).pop();
           }, child: Text('确定')),
           FlatButton(onPressed: (){
             Navigator.of(context).pop();

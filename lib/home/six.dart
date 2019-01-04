@@ -150,7 +150,7 @@ class Six extends StatelessWidget {
                         hintText: 'Search category',
                         hintStyle: TextStyle(color: Colors.black26)),
                     cursorColor: Colors.pink,
-                  ))
+                  )),
             ],
           ),
         ),

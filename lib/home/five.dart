@@ -6,6 +6,21 @@ import '../modal/user_info.dart';
 class Five extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Widget> bottomList = [];
+    for (var i = 0; i < 10; i++) {
+      bottomList.add(
+          new InkWell(
+            child:  new ListTile(
+              leading: new Icon(Icons.photo_camera),
+              title: new Text("Camera$i"),
+            ),
+            onTap: (){
+              print('Camera$i');
+              Navigator.pop(context);
+            },
+          )
+      );
+    }
     return StoreConnector<AppState,Map>(
       converter: (store){
         var userInfo = store.state.userInfo;
@@ -47,7 +62,36 @@ class Five extends StatelessWidget {
               Center(
                 child: Text(map['text']),
               ),
-              Text(male)
+              Text(male),
+              FloatingActionButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context){
+                       /* return new CustomScrollView(
+                          slivers: <Widget>[
+                            SliverList(
+                                delegate: new SliverChildBuilderDelegate(
+                                  (BuildContext context,int index){
+                                    return bottomList[index];
+                                  },
+                                  childCount: bottomList.length,
+                                ),
+                            )
+                          ],
+                        );*/
+                       return new ListView.builder(
+                           itemBuilder: (BuildContext context ,int index){
+                              return bottomList[index];
+                          },
+                         itemCount: bottomList.length,
+                       );
+                      }
+                  );
+                },
+                foregroundColor: Colors.white,
+                child: Text('点我'),
+              )
             ],
           ),
         );
