@@ -3,6 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import './../store/store.dart' show AppState;
 import '../store/reducer/userInfo_reducer.dart' show UserInfoAction;
 import '../modal/user_info.dart';
+import '../routers/application.dart';
+
 class Five extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -91,6 +93,16 @@ class Five extends StatelessWidget {
                 },
                 foregroundColor: Colors.white,
                 child: Text('点我'),
+              ),
+              new Row(
+                children: <Widget>[
+                  new RaisedButton(
+                    child: Text('TextField'),
+                    onPressed: (){
+                      Application.router.navigateTo(context, "/text-field");
+                    },
+                  )
+                ],
               )
             ],
           ),

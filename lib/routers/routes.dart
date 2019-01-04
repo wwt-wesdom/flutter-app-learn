@@ -10,6 +10,7 @@ class Routes {
   static String six = "/six";
   static String sliverHeader = "/sliver-header";
   static String sliverAppBar = "/sliver-app-bar";
+  static String textFieldPage = "/text-field";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -23,5 +24,6 @@ class Routes {
     router.define(six, handler: sixHandler);
     router.define(sliverHeader, handler: sliverHeaderHandler);
     router.define(sliverAppBar, handler: sliverAppbarPageHandler);
+    router.define(textFieldPage, handler: textFieldPageHandler);
   }
 }

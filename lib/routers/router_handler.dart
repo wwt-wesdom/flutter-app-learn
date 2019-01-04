@@ -6,6 +6,7 @@ import '../home/categories.dart';
 import '../home/six.dart';
 import '../home/sliver_header.dart';
 import '../home/sliver_app_bar.dart';
+import '../home/text_field.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -43,5 +44,11 @@ Handler sliverHeaderHandler = Handler(
 Handler sliverAppbarPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return SliverAppbarPage();
+    }
+);
+
+Handler textFieldPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return TextFieldPage();
     }
 );
