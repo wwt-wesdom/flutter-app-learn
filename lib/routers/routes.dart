@@ -11,6 +11,9 @@ class Routes {
   static String sliverHeader = "/sliver-header";
   static String sliverAppBar = "/sliver-app-bar";
   static String textFieldPage = "/text-field";
+  static String dialogsDemo = "/dialogs-demo";
+  static String drawerDemo = "/drawer-demo";
+  static String scrollTabsDemo = "/scroll-tabs-demo";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -25,5 +28,8 @@ class Routes {
     router.define(sliverHeader, handler: sliverHeaderHandler);
     router.define(sliverAppBar, handler: sliverAppbarPageHandler);
     router.define(textFieldPage, handler: textFieldPageHandler);
+    router.define(dialogsDemo, handler: dialogsDemoHandler);
+    router.define(drawerDemo, handler: drawerDemoHandler);
+    router.define(scrollTabsDemo, handler: scrollTabsDemoHandler);
   }
 }

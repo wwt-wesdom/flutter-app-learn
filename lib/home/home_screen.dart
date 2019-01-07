@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
     return Scaffold(
-      appBar: AppBar(
+      appBar: new AppBar(
         elevation: 0,
         title: Text('微信'),
         actions: <Widget>[

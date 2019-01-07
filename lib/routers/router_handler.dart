@@ -7,6 +7,9 @@ import '../home/six.dart';
 import '../home/sliver_header.dart';
 import '../home/sliver_app_bar.dart';
 import '../home/text_field.dart';
+import '../home/dialogs_demo.dart';
+import '../home/drawer_demo.dart';
+import '../home/scroll_tabs_demo.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -50,5 +53,23 @@ Handler sliverAppbarPageHandler = Handler(
 Handler textFieldPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return TextFieldPage();
+    }
+);
+
+Handler dialogsDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return DialogsDemo();
+    }
+);
+
+Handler drawerDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return DrawerDemo();
+    }
+);
+
+Handler scrollTabsDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return ScrollTabsDemo();
     }
 );

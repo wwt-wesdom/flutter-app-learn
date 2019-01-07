@@ -30,7 +30,8 @@ class App extends StatelessWidget {
           },
           converter: (store){
             return store.state.map['color'];
-          });
+          }
+      );
     }
   }
 
