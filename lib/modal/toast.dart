@@ -4,10 +4,7 @@ class Toast {
   static bool _showing = false; //toast是否正在showing
   static DateTime _startedTime; //开启一个新toast的当前时间，用于对比是否已经展示了足够时间
   static String _msg;
-  static void toast(
-      BuildContext context,
-      String msg,
-      ) async {
+  static void toast({BuildContext context, String msg, int second = 2000,}) async {
     assert(msg != null);
     _msg = msg;
     _startedTime = DateTime.now();
@@ -38,10 +35,10 @@ class Toast {
       //重新绘制UI，类似setState
       _overlayEntry.markNeedsBuild();
     }
-    await Future.delayed(Duration(milliseconds: 2000)); //等待两秒
+    await Future.delayed(Duration(milliseconds: second)); //等待两秒
 
     //2秒后 到底消失不消失
-    if (DateTime.now().difference(_startedTime).inMilliseconds >= 2000) {
+    if (DateTime.now().difference(_startedTime).inMilliseconds >= second) {
       _showing = false;
 //      _overlayEntry.markNeedsBuild();
       _overlayEntry.remove();

@@ -158,31 +158,33 @@ class _HorseListState extends State<HorseList> {
         )
       ],
     );*/
-    return CustomScrollView(
-     slivers: <Widget>[
-       SliverToBoxAdapter(
-         child: Container(
-           decoration: BoxDecoration(
-             color: Colors.red
-           ),
-           height: 400,
-           child: ListView.builder(
-             scrollDirection: Axis.horizontal,
-             itemBuilder: (BuildContext context,int index){
-               return _HorseListItem(mokSkyHorseList[index]);},
-             itemCount: mokSkyHorseList.length,
-           ),
-         ),
-       ),
-       SliverList(
-         delegate: SliverChildBuilderDelegate(
-           (BuildContext context, int index) {
-             return _HorseListItem(mokSkyHorseList[index]);
-           },
-           childCount: mokSkyHorseList.length,
-         ),
-       )
-     ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('HorseList'),
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Container(
+              height: 400,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context,int index){
+                  return _HorseListItem(mokSkyHorseList[index]);},
+                itemCount: mokSkyHorseList.length,
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                return _HorseListItem(mokSkyHorseList[index]);
+              },
+              childCount: mokSkyHorseList.length,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

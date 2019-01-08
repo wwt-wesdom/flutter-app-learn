@@ -156,7 +156,7 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                       width: 1.0,
                       color: Colors.yellow
                     ),
-                    color: Colors.blue,
+                    color: Colors.grey.shade50,
                   ),
                   child: new InkWell(
                     child: Row(
@@ -167,11 +167,11 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                           padding: EdgeInsets.only(right: 8.0,left: 30.0),
                           child: Icon(
                             Icons.search,
-                            color: Colors.white,
+                            color: Colors.grey,
                             size: 20.0,
                           ),
                         ),
-                        new Text('search category',style: TextStyle(fontSize: 14.0),),
+                        new Text('search category',style: TextStyle(fontSize: 14.0,color: Colors.grey),),
                        /* new Expanded(
                             child: TextField(
                               keyboardType: TextInputType.text,
@@ -198,6 +198,7 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
             background: Container(
               height: 200.0,
               child: Swiper(
+                autoplay: true,
                 itemCount: 3,
                 itemBuilder: (BuildContext context,int index){
                   return imgListSwiper[index];

@@ -174,7 +174,7 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                   new RaisedButton(
                     child: Text('toast',style: TextStyle(color: Colors.blue)),
                     onPressed: (){
-                     Toast.toast(context,'tosatalfldjjkflljfladsfjlsdfjasdlfjasldkfjaksldfjaksldfj');
+                     Toast.toast(context:context,msg:'123456789',second: 500);
 
                     },
                   ),

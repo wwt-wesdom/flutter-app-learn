@@ -5,7 +5,6 @@ import './conversation_page.dart';
 import './horse_list.dart';
 import './sliver_app_bar.dart';
 import './fourth.dart';
-import './click.dart';
 import '../routers/routes.dart';
 import '../routers/application.dart';
 enum ActionItems {
@@ -36,14 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
     Application.router = router;
   }
   PageController _pageController;
-  int _currentIndex = 3;
+  int _currentIndex = 0;
   List<Widget> _pages;
   List<NavigationIconView> _navigationViews;
   void initState() {
     super.initState();
     _navigationViews = [
       NavigationIconView(
-          title: '微信',
+          title: '首页',
           icon: IconData(
             0xe608,
             fontFamily: Constants.IconFontFamily,
@@ -54,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
       ),
       NavigationIconView(
-          title: '通讯录',
+          title: '列表',
           icon: IconData(
             0xe601,
             fontFamily: Constants.IconFontFamily,
@@ -65,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
       ),
       NavigationIconView(
-          title: '发现',
+          title: '工具',
           icon: IconData(
             0xe600,
             fontFamily: Constants.IconFontFamily,
@@ -89,10 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
     _pageController = PageController(initialPage: _currentIndex);
     _pages = [
-      ConversationPage(),
-      HorseList(),
       SliverAppbarPage(),
+      HorseList(),
       Fourth(),
+      ConversationPage(),
     ];
   }
 
@@ -128,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
     return Scaffold(
-      appBar: new AppBar(
+     /* appBar: new AppBar(
         elevation: 0,
         title: Text('微信'),
         actions: <Widget>[
@@ -173,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(width: 10.0)
         ],
-      ),
+      ),*/
       body: PageView.builder(
          itemBuilder: (BuildContext context,int index){
             return _pages[index];

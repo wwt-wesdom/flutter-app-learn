@@ -8,6 +8,7 @@ import 'dart:core';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker_saver/image_picker_saver.dart';
+import '../modal/toast.dart';
 class Fourth extends StatefulWidget {
   @override
   _FourthState createState() => _FourthState();
@@ -39,6 +40,9 @@ class _FourthState extends State<Fourth> {
 
   void saveImage() async {
     var filePath = await ImagePickerSaver.saveFile(fileData: images[0]);
+    if(filePath != null){
+      Toast.toast(context:context, msg:'保存成功');
+    }
 //    print(filePath);
   }
 
