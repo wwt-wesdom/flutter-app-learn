@@ -90,21 +90,66 @@ class SliverAppbarPage extends StatefulWidget {
 }
 
 class _SliverAppbarPageState extends State<SliverAppbarPage> {
+  ScrollController _controller = new ScrollController();
+  bool showToTopBtn = false;
+  @override
+  void initState(){
+    _controller.addListener(() {
+      print(_controller.offset); //打印滚动位置
+      if (_controller.offset < 200 && showToTopBtn) {
+        setState(() {
+          showToTopBtn = false;
+        });
+      } else if (_controller.offset >= 200 && showToTopBtn == false) {
+        setState(() {
+          showToTopBtn = true;
+        });
+      }
+    });
+  }
+  @override
+  void dispose() {
+    //为了避免内存泄露，需要调用_controller.dispose
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: _controller,
       slivers: <Widget>[
-        SliverAppBar(
+        new SliverAppBar(
 //          控制tab是否消失
           pinned: true,
           title: Container(
+            color: Colors.white10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-//                Text('sliverAppBar'),
-                Container(
-                  height: 30.0,
+               /* new Offstage(
+                  offstage: showToTopBtn,
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('club factory',style: TextStyle(fontSize: 16.0),),
+                    ],
+                  ),
+                ),*/
+                new AnimatedContainer(
+                  height: showToTopBtn?0.0:20.0,
+                  duration: Duration(milliseconds: 300),
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('club factory',style: TextStyle(fontSize: 16.0),),
+                    ],
+                  ),
+                ),
+//                 Text('sliverAppBar'),
+                new Container(
+                  height: 25.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     border: Border.all(
@@ -113,7 +158,7 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                     ),
                     color: Colors.blue,
                   ),
-                  child: InkWell(
+                  child: new InkWell(
                     child: Row(
                      /* mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,*/
@@ -166,13 +211,14 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
             ),
           ),
         ),
-        SliverFixedExtentList(
+        new SliverFixedExtentList(
             delegate: SliverChildListDelegate(
               _products.map((product){
                 return _buildItemList(product);
               }).toList(),
             ),
-            itemExtent: 100
+            itemExtent: 100,
+
         )
       ],
     );

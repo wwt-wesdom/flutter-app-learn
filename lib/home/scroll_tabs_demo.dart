@@ -116,6 +116,7 @@ class _ScrollTabsDemoState extends State<ScrollTabsDemo> with SingleTickerProvid
     final Color iconColor = Theme.of(context).accentColor;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pink,
         title: const Text('Scroll tabs'),
         actions: <Widget>[
          IconButton(
@@ -130,16 +131,16 @@ class _ScrollTabsDemoState extends State<ScrollTabsDemo> with SingleTickerProvid
             onSelected: changeDemoStyle,
             itemBuilder: (BuildContext context) => <PopupMenuItem<TabsDemoStyle>>[
               const PopupMenuItem(
-                  value: TabsDemoStyle.iconsAndText,
+                value: TabsDemoStyle.iconsAndText,
                 child: Text('Icons and text')
               ),
               const PopupMenuItem(
-                  value: TabsDemoStyle.iconsOnly,
-                  child: Text('Icons only')
+                value: TabsDemoStyle.iconsOnly,
+                child: Text('Icons only')
               ),
               const PopupMenuItem(
-                  value: TabsDemoStyle.textOnly,
-                  child: Text('Text only')
+                value: TabsDemoStyle.textOnly,
+                child: Text('Text only')
               )
             ],
           )
@@ -170,10 +171,11 @@ class _ScrollTabsDemoState extends State<ScrollTabsDemo> with SingleTickerProvid
               key: ObjectKey(page.icon),
               padding: const EdgeInsets.all(12.0),
               child: Card(
+                color: Colors.yellow,
                 child: Center(
                   child: Icon(
                     page.icon,
-                    color: Colors.white,
+                    color: iconColor,
                     size: 128.0,
                     semanticLabel: 'Placeholder for ${page.text} tab',
                   ),

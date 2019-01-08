@@ -22,8 +22,8 @@ class App extends StatelessWidget {
             return  MaterialApp(
               title: '微信',
               theme: ThemeData(
-                primarySwatch: color,
-                cardColor: color,
+                primarySwatch: Colors.pink,
+                cardColor: Colors.white,
               ),
               home: HomeScreen(),
             );
