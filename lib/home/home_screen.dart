@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Application.router = router;
   }
   PageController _pageController;
-  int _currentIndex = 1;
+  int _currentIndex = 3;
   List<Widget> _pages;
   List<NavigationIconView> _navigationViews;
   void initState() {

@@ -189,6 +189,14 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                     onPressed: (){
                       Application.router.navigateTo(context, "/scroll-tabs-demo");
                     },
+                  ),
+                  new Container(width: 5.0,),
+                  new RaisedButton(
+                    color: Colors.black,
+                    child: Text('gridListDemo',style: TextStyle(color: Colors.blue)),
+                    onPressed: (){
+                      Application.router.navigateTo(context, "/grid-list-demo");
+                    },
                   )
                 ],
               )

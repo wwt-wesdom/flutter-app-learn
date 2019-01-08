@@ -14,6 +14,7 @@ class Routes {
   static String dialogsDemo = "/dialogs-demo";
   static String drawerDemo = "/drawer-demo";
   static String scrollTabsDemo = "/scroll-tabs-demo";
+  static String gridListDemo = "/grid-list-demo";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -31,5 +32,6 @@ class Routes {
     router.define(dialogsDemo, handler: dialogsDemoHandler);
     router.define(drawerDemo, handler: drawerDemoHandler);
     router.define(scrollTabsDemo, handler: scrollTabsDemoHandler);
+    router.define(gridListDemo, handler: gridListDemoHandler);
   }
 }

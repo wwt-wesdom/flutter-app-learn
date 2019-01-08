@@ -10,6 +10,7 @@ import '../home/text_field.dart';
 import '../home/dialogs_demo.dart';
 import '../home/drawer_demo.dart';
 import '../home/scroll_tabs_demo.dart';
+import '../home/grid_list_demo.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -73,3 +74,10 @@ Handler scrollTabsDemoHandler = Handler(
       return ScrollTabsDemo();
     }
 );
+
+Handler gridListDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return GridListDemo();
+    }
+);
+
