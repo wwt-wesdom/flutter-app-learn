@@ -5,7 +5,7 @@ import '../store/reducer/userInfo_reducer.dart' show UserInfoAction;
 import '../modal/user_info.dart';
 import '../routers/application.dart';
 import '../modal/toast.dart' show Toast;
-
+import 'package:flutter/services.dart';
 class Five extends StatefulWidget {
   @override
   _FiveState createState() => _FiveState();
@@ -19,9 +19,17 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
         content: Text("The drawer's items don't do anything")
     ));
   }
+  static copyToClipboard(String text,context){
+    Clipboard.setData(new ClipboardData(text: text));
+    Toast.toast(context: context,msg: '复制成功');
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> bottomList = [];
+
+
+
     for (var i = 0; i < 10; i++) {
       bottomList.add(
           new InkWell(
@@ -196,6 +204,26 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                     child: Text('gridListDemo',style: TextStyle(color: Colors.blue)),
                     onPressed: (){
                       Application.router.navigateTo(context, "/grid-list-demo");
+                    },
+                  ),
+                  new Container(width: 5.0,),
+                  new RaisedButton(
+                    color: Colors.black,
+                    child: Text('clipboardData',style: TextStyle(color: Colors.green)),
+                    onPressed: (){
+                      copyToClipboard('wwtwesdom01',context);
+                    },
+                  ),
+                ],
+              ),
+              new Row(
+                children: <Widget>[
+                  new Container(width: 5.0,),
+                  new RaisedButton(
+                    color: Colors.pink,
+                    child: Text('sharedPreferences',style: TextStyle(color: Colors.white)),
+                    onPressed: (){
+                      Application.router.navigateTo(context, "/shared-preferences-demo");
                     },
                   )
                 ],

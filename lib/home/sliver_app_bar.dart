@@ -94,6 +94,7 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
   bool showToTopBtn = false;
   @override
   void initState(){
+    super.initState();
     _controller.addListener(() {
       print(_controller.offset); //打印滚动位置
       if (_controller.offset < 200 && showToTopBtn) {

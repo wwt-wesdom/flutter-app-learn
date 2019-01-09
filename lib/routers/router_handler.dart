@@ -11,6 +11,7 @@ import '../home/dialogs_demo.dart';
 import '../home/drawer_demo.dart';
 import '../home/scroll_tabs_demo.dart';
 import '../home/grid_list_demo.dart';
+import '../home/shared_preferences_demo.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -78,6 +79,12 @@ Handler scrollTabsDemoHandler = Handler(
 Handler gridListDemoHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return GridListDemo();
+    }
+);
+
+Handler sharedPreferencesDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return SharedPreferencesDemo();
     }
 );
 

@@ -163,6 +163,7 @@ class _GridListDemoState extends State<GridListDemo> {
         print('滑动到了最底部');
         moreList();
       }
+      print(_controller.offset);
     });
   }
   void toList(){
