@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import '../api/index.dart';
 
 class GridListDemo extends StatefulWidget {
   @override
@@ -60,6 +61,7 @@ class _GridListDemoState extends State<GridListDemo> {
   List<ProductItem> _products = [];
   bool noMoreData = true;
   bool loading = true;
+  bool showToTop = true;
   List<ProductItem> _productsTwo = [
     ProductItem(
       name: 'Bueno Chocolate',
@@ -132,7 +134,36 @@ class _GridListDemoState extends State<GridListDemo> {
       loading = false;
       noMoreData = true;
     });
-    Response response = await dio.get("http://192.168.100.133:8099/api/coupon/every-special-offer.json?topcate=&subcate=&page=$pageIndex&pageSize=10&ptype=&sort=");
+    ApiConfig.getProductList({
+      "topcate": "",
+      "subcate": "",
+      "page": pageIndex,
+      "pageSize": 10,
+      "ptype": "",
+      "sort": ""
+    }).then((res){
+      print(res.data.data);
+      if(res.data.data !=null && res.data.data['data'].length > 0){
+        print(res.data);
+        List listData = res.data.data['data'];
+        listData.forEach((item){
+          _products.add(ProductItem(
+              name: item['title'],
+              asset: item['picUrl']
+          ));
+        });
+        setState(() {
+          _products = _products;
+          loading = true;
+        });
+      }else{
+        setState(() {
+          loading = true;
+          noMoreData = false;
+        });
+      }
+    });
+   /* Response response = await dio.get("http://192.168.100.133:8099/api/coupon/every-special-offer.json?topcate=&subcate=&page=$pageIndex&pageSize=10&ptype=&sort=");
     if(response.data['data'] !=null && response.data['data']['data'].length > 0){
       List listData = response.data['data']['data'];
       listData.forEach((item){
@@ -150,7 +181,7 @@ class _GridListDemoState extends State<GridListDemo> {
         loading = true;
         noMoreData = false;
       });
-    }
+    }*/
   }
 
   void initState(){
@@ -164,6 +195,21 @@ class _GridListDemoState extends State<GridListDemo> {
         moreList();
       }
       print(_controller.offset);
+      if(_controller.offset >= 500){
+        print(showToTop);
+        if(showToTop){
+          setState(() {
+            showToTop = false;
+          });
+        }
+      }else {
+        print(showToTop);
+        if(!showToTop){
+          setState(() {
+            showToTop = true;
+          });
+        }
+      }
     });
   }
   void toList(){
@@ -185,46 +231,64 @@ class _GridListDemoState extends State<GridListDemo> {
         title: Text('GridListDemo'),
       ),
       body: RefreshIndicator(
-        child: new CustomScrollView(
-          controller: _controller,
-          slivers: <Widget>[
-            new SliverGrid.count(
-              crossAxisCount: 2,
-              childAspectRatio: 1,
-              children: _products.map((product){
-                return _buildItemGrid(product);
-              }).toList(),
-            ),
-            new SliverToBoxAdapter(
-              child: Offstage(
-                offstage: loading,
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Container(
-                    child: Center(
-                      child: Text('正在加载中...',style: TextStyle(color: Colors.red),),
+        child: new Stack(
+          children: <Widget>[
+            new CustomScrollView(
+              controller: _controller,
+              slivers: <Widget>[
+                new SliverGrid.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1,
+                  children: _products.map((product){
+                    return _buildItemGrid(product);
+                  }).toList(),
+                ),
+                new SliverToBoxAdapter(
+                  child: Offstage(
+                    offstage: loading,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Container(
+                        child: Center(
+                          child: Text('正在加载中...',style: TextStyle(color: Colors.red),),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            new SliverToBoxAdapter(
-              child: Offstage(
-                offstage: noMoreData,
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Container(
-                   /* decoration: BoxDecoration(
+                new SliverToBoxAdapter(
+                  child: Offstage(
+                    offstage: noMoreData,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Container(
+                        /* decoration: BoxDecoration(
                       border: Border(
                         top: BorderSide(color: Colors.pink,width: 10.0)
                       )
                     ),*/
-                    child: Center(
-                      child: Text('没有更多数据了！',style: TextStyle(color: Colors.red),),
+                        child: Center(
+                          child: Text('没有更多数据了！',style: TextStyle(color: Colors.red),),
+                        ),
+                      ),
                     ),
                   ),
+                )
+              ],
+            ),
+            new Positioned(
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 1000),
+                opacity: showToTop?0.0:1.0,
+                child: FloatingActionButton(
+                  onPressed: (){
+                    _controller.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+                  },
+                  child: Icon(Icons.arrow_upward),
                 ),
               ),
+              bottom: 50.0,
+              right: 20.0,
             )
           ],
         ),

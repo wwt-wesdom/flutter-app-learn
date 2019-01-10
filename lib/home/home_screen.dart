@@ -123,7 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
           _currentIndex = index;
           _pageController.animateToPage(_currentIndex, duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
         });
-        print('点击的是第$index个tab');
       },
     );
     return Scaffold(
@@ -183,7 +182,6 @@ class _HomeScreenState extends State<HomeScreen> {
            setState(() {
              _currentIndex = index;
            });
-           print('当前显示的是第$index页');
          },
        ),
       bottomNavigationBar: botNavBar,

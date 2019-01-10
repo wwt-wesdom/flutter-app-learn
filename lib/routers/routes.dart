@@ -33,6 +33,7 @@ class Routes {
     router.define(dialogsDemo, handler: dialogsDemoHandler);
     router.define(drawerDemo, handler: drawerDemoHandler);
     router.define(scrollTabsDemo, handler: scrollTabsDemoHandler);
+    router.define(gridListDemo, handler: gridListDemoHandler);
     router.define(sharedPreferencesDemo, handler: sharedPreferencesDemoHandler);
   }
 }

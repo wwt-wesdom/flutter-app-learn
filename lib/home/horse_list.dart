@@ -3,11 +3,18 @@ import '../modal/conversation.dart' show SkyHorseList;
 import '../routers/application.dart';
 import 'dart:core';
 import 'package:dio/dio.dart';
-
+import 'dart:convert';
+import '../api/index.dart';
+class ModelChange {
+  final data;
+  ModelChange({this.data}):assert(data != null);
+}
 class HorseList extends StatefulWidget {
   @override
   _HorseListState createState() => _HorseListState();
 }
+
+
 
 class _HorseListItem extends StatelessWidget {
   _HorseListItem(SkyHorseList item) {
@@ -111,6 +118,8 @@ class _HorseListItem extends StatelessWidget {
   }
   
 }
+
+
 class _HorseListState extends State<HorseList> {
   List<dynamic> listData = [];
   List<SkyHorseList> mokSkyHorseList = [];
@@ -118,46 +127,37 @@ class _HorseListState extends State<HorseList> {
     super.initState();
     dioText();
   }
-  void dioText() async{
-    Dio dio = Dio();
+
+  void dioText() {
+    /*Dio dio = Dio();
     Response response = await dio.get("http://192.168.100.133:8099/api/theme/list.json?pageIndex=1&pageSize=10&sort=&orderBy=");
-    listData = response.data['data']['content'];
-    listData.forEach((item){
-      mokSkyHorseList.add(SkyHorseList(
+    print(ModelChange(data: response.data["data"]).data);*/
+    ApiConfig.getHorseList({
+      "pageIndex":1,
+      "pageSize": 10,
+      "sort": "",
+      "orderBy": "",
+    }).then((res){
+      print(res.data.data);
+      listData = res.data.data["content"];
+      List<SkyHorseList> _mokSkyHorseList = [];
+      listData.forEach((item){
+      _mokSkyHorseList.add(SkyHorseList(
           title: item['content'],
           imgUrl: item['items'][0]['itemPicUrl'],
           price: '9.9',
           time: item['createTime']
       ));
-    });
-    setState(() {
-      mokSkyHorseList = mokSkyHorseList;
+     });
+     setState(() {
+      mokSkyHorseList.addAll(_mokSkyHorseList);
+     });
     });
   }
   var a = 15;
-  Future<void> _onRefresh() async {
-    print('刷新');
-  }
   @override
   Widget build(BuildContext context) {
-    /*return Column(
-      children: <Widget>[
-        Container(
-          child: Text('title'),
-        ),
-        Container(
-          height: 600,
-          child: RefreshIndicator(
-            onRefresh: _onRefresh,
-            child: ListView.builder(
-              itemBuilder: (BuildContext context,int index){
-                return _HorseListItem(skyHorseList:mokSkyHorseList[index]);},
-              itemCount: mokSkyHorseList.length,
-            ),
-          ),
-        )
-      ],
-    );*/
+
     return Scaffold(
       appBar: AppBar(
         title: Text('HorseList'),

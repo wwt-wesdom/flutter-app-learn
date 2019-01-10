@@ -27,9 +27,6 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     List<Widget> bottomList = [];
-
-
-
     for (var i = 0; i < 10; i++) {
       bottomList.add(
           new InkWell(
@@ -211,7 +208,7 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                     color: Colors.black,
                     child: Text('clipboardData',style: TextStyle(color: Colors.green)),
                     onPressed: (){
-                      copyToClipboard('wwtwesdom01',context);
+                      copyToClipboard('bainana',context);
                     },
                   ),
                 ],
