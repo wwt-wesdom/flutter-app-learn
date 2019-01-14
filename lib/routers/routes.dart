@@ -16,6 +16,7 @@ class Routes {
   static String scrollTabsDemo = "/scroll-tabs-demo";
   static String gridListDemo = "/grid-list-demo";
   static String sharedPreferencesDemo = "/shared-preferences-demo";
+  static String videoPlayerDemo = "/video-player-demo";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -35,5 +36,6 @@ class Routes {
     router.define(scrollTabsDemo, handler: scrollTabsDemoHandler);
     router.define(gridListDemo, handler: gridListDemoHandler);
     router.define(sharedPreferencesDemo, handler: sharedPreferencesDemoHandler);
+    router.define(videoPlayerDemo, handler: videoPlayerDemoHandler);
   }
 }

@@ -21,7 +21,6 @@ class _TimeDownState extends State<TimeDown> {
     if (time - DateUtil.getNowDateMs() <= 0){
       return '倒计时结束';
     }
-//  timerCountDown.cancel();
     timerCountDown.setOnTimerTickCallback((int value){
       double tick = (value/1000);
       int leftTime = tick.toInt();
@@ -32,14 +31,11 @@ class _TimeDownState extends State<TimeDown> {
       double minDouble = (leftTime / 60 % 60);
       String min = minDouble.toInt().toString();
       String s = (leftTime % 60).toString();
-//      timeString = "$day天$hour小时$min分$s秒";
-      print(1111);
       setState(() {
         timeString = "$day天$hour小时$min分$s秒";
       });
     });
     timerCountDown.startCountDown();
-//    return timeString;
   }
   @override
   void dispose(){

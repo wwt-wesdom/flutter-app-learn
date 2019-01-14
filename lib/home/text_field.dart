@@ -11,7 +11,10 @@ class _TextFieldPageState extends State<TextFieldPage> {
   bool _checkboxSelected = true;
   TimerUtil timerUtil = new TimerUtil(mInterval: 1000);
   TimerUtil timerCountDown = new TimerUtil(mInterval: 1000,mTotalTime: (1547535547000 - DateUtil.getNowDateMs()));
-  String timeDownCount = "ldfjaskldfjk";
+  String timeDownCount;
+  String getVsCode = '获取验证码';
+  double count = 0;
+  bool disabled = false;
 
   getTime(){
     timerUtil.setOnTimerTickCallback((int value){
@@ -24,27 +27,29 @@ class _TextFieldPageState extends State<TextFieldPage> {
   }
 
   timeDown(){
-    timerCountDown.cancel();
-    String timeString;
-    timerCountDown.setOnTimerTickCallback((int value){
-      double tick = (value/1000);
-      int leftTime = tick.toInt();
-      double dayDouble = (leftTime/(24*60*60));
-      String day = dayDouble.toInt().toString();
-      double hourDouble = (leftTime/(60*60)%24);
-      String hour = hourDouble.toInt().toString();
-      double minDouble = (leftTime / 60 % 60);
-      String min = minDouble.toInt().toString();
-      String s = (leftTime % 60).toString();
-      timeString = "$day天$hour小时$min分$s秒";
-      setState(() {
-//        timeDownCount = tick.toInt().toString();
-        timeDownCount = "$day天$hour小时$min分$s秒";
-      });
+    if(count == 0){
+      timerCountDown = new TimerUtil(mInterval: 1000,mTotalTime: (20*1000));
+      timerCountDown.cancel();
+      timerCountDown.setOnTimerTickCallback((int value){
+        double tick = (value/1000);
+        count= tick;
+        if(count == 0){
+          setState(() {
+            getVsCode = "获取验证码";
+            disabled = false;
+          });
+        }else{
+          setState(() {
+            disabled = true;
+            timeDownCount = tick.toInt().toString();
+            getVsCode = "${timeDownCount}s";
+          });
+        }
+
 //      LogUtil.e("countDown:" + tick.toInt().toString());
-    });
-    timerCountDown.startCountDown();
-    return timeString;
+      });
+      timerCountDown.startCountDown();
+    }
   }
 
   getDateUtil(){
@@ -88,8 +93,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
                 print("onChange:$v");
               },
             ),
-            Text(timeDownCount),
-            Text(timeDown()!= null?timeDown():'11111'),
+            Text("${timeDownCount}s"),
             new RaisedButton(
               onPressed: (){
                 print(_unameController.text);
@@ -101,17 +105,19 @@ class _TextFieldPageState extends State<TextFieldPage> {
               shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               splashColor: Colors.grey,
               colorBrightness: Brightness.dark,
+              disabledColor: Colors.yellow,
             ),
             new FlatButton(
-              onPressed: (){
+              onPressed: disabled? null : (){
                 timeDown();
               },
-              child: Text('flatBtn'),
+              child: Text(getVsCode),
               color: Colors.blue,
               highlightColor: Colors.blue[700],
               shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               splashColor: Colors.grey,
               colorBrightness: Brightness.dark,
+              disabledColor: Colors.yellow,
             ),
             new OutlineButton(
               onPressed: (){
