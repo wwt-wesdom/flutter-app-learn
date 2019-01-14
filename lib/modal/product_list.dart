@@ -7,6 +7,7 @@ class ProductItem {
   final String asset;
   final int stock;
   final double price;
+  final int time;
 
   ProductItem({
     this.name,
@@ -14,6 +15,7 @@ class ProductItem {
     this.asset,
     this.stock,
     this.price,
+    this.time,
   });
 }
 

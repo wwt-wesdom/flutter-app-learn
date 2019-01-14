@@ -1,82 +1,64 @@
 import 'package:flutter/material.dart';
 import '../modal/product_list.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+//import 'package:common_utils/common_utils.dart';
+import '../compnents/time_down.dart';
+
 final List<ProductItem> _products = [
   ProductItem(
     name: 'Bueno Chocolate',
     asset: 'assets/images/food01.jpeg',
+    time: 1547528347000
   ),
   ProductItem(
     name: 'Chocolate with berries',
     asset: 'assets/images/food02.jpeg',
+    time: 1547531947000,
   ),
   ProductItem(
     name: 'Trumoo Candies',
     asset: 'assets/images/food03.jpeg',
+    time: 1547535547000,
   ),
   ProductItem(
     name: 'Choco-coko',
     asset: 'assets/images/food04.jpeg',
+    time: 1547535567000
   ),
   ProductItem(
     name: 'Chocolate tree',
     asset: 'assets/images/food05.jpeg',
+    time: 1547535667000
   ),
   ProductItem(
     name: 'Chocolate',
     asset: 'assets/images/food06.jpeg',
+    time: 1547535767000
   ),
   ProductItem(
     name: 'Bueno Chocolate',
     asset: 'assets/images/food01.jpeg',
+    time: 1547535867000
   ),
   ProductItem(
     name: 'Choco-coko',
     asset: 'assets/images/food04.jpeg',
+    time: 1547535967000
   ),
   ProductItem(
     name: 'Chocolate tree',
     asset: 'assets/images/food05.jpeg',
+    time: 1547536067000
   ),
   ProductItem(
     name: 'Chocolate tree',
     asset: 'assets/images/food05.jpeg',
+    time: 1547536167000
   ),
   ProductItem(
     name: 'Chocolate tree',
     asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'assets/images/food05.jpeg',
+    time: 1547536267000
   ),
 ];
 List imgListSwiper = [
@@ -92,11 +74,38 @@ class SliverAppbarPage extends StatefulWidget {
 class _SliverAppbarPageState extends State<SliverAppbarPage> {
   ScrollController _controller = new ScrollController();
   bool showToTopBtn = false;
+/*  String timeDownCount;
+  timeDown(time){
+    if (time - DateUtil.getNowDateMs() <= 0){
+      return '倒计时结束';
+    }
+    TimerUtil timerCountDown = new TimerUtil(mInterval: 1000,mTotalTime: (time - DateUtil.getNowDateMs()));
+    timerCountDown.cancel();
+    String timeString;
+    timerCountDown.setOnTimerTickCallback((int value){
+      double tick = (value/1000);
+      int leftTime = tick.toInt();
+      double dayDouble = (leftTime/(24*60*60));
+      String day = dayDouble.toInt().toString();
+      double hourDouble = (leftTime/(60*60)%24);
+      String hour = hourDouble.toInt().toString();
+      double minDouble = (leftTime / 60 % 60);
+      String min = minDouble.toInt().toString();
+      String s = (leftTime % 60).toString();
+      setState(() {
+        timeDownCount = tick.toInt().toString();
+        timeDownCount = "$day天$hour小时$min分$s秒";
+      });
+//      LogUtil.e("countDown:" + tick.toInt().toString());
+      timeString = "$day天$hour小时$min分$s秒";
+    });
+    timerCountDown.startCountDown();
+    return timeString;
+  }*/
   @override
   void initState(){
     super.initState();
     _controller.addListener(() {
-      print(_controller.offset); //打印滚动位置
       if (_controller.offset < 200 && showToTopBtn) {
         setState(() {
           showToTopBtn = false;
@@ -252,9 +261,14 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 15.0),
-                  child: Text(
-                    product.name,
-                    overflow: TextOverflow.ellipsis,
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        product.name,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      TimeDown(product.time)
+                    ],
                   ),
                 ),
               ),

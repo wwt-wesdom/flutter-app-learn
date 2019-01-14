@@ -95,7 +95,7 @@ class _SliverheaderState extends State<Sliverheader> {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-          _buildHeader(0),
+//          _buildHeader(0),
           SliverGrid.count(
             crossAxisCount: 3,
             children: _products.map((product){
@@ -111,7 +111,7 @@ class _SliverheaderState extends State<Sliverheader> {
             ),
             itemExtent: 100.0
           ),
-          _buildHeader(2),
+//          _buildHeader(2),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context,int index){
@@ -296,7 +296,7 @@ class _SliverheaderState extends State<Sliverheader> {
       floating: floating,
       delegate: _SliverAppBarDelegate(
         minHeight: 60.0,
-        maxHeight: 180.0,
+        maxHeight: 60.0,
         child: Container(
           decoration: BoxDecoration(
               backgroundBlendMode: BlendMode.plus,

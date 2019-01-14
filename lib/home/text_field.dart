@@ -10,7 +10,8 @@ class _TextFieldPageState extends State<TextFieldPage> {
   bool _switchSelected = true;
   bool _checkboxSelected = true;
   TimerUtil timerUtil = new TimerUtil(mInterval: 1000);
-  String timeDownCount;
+  TimerUtil timerCountDown = new TimerUtil(mInterval: 1000,mTotalTime: (1547535547000 - DateUtil.getNowDateMs()));
+  String timeDownCount = "ldfjaskldfjk";
 
   getTime(){
     timerUtil.setOnTimerTickCallback((int value){
@@ -23,22 +24,47 @@ class _TextFieldPageState extends State<TextFieldPage> {
   }
 
   timeDown(){
-    TimerUtil timerCountDown = new TimerUtil(mInterval: 1000,mTotalTime: 30*1000);
     timerCountDown.cancel();
+    String timeString;
     timerCountDown.setOnTimerTickCallback((int value){
       double tick = (value/1000);
+      int leftTime = tick.toInt();
+      double dayDouble = (leftTime/(24*60*60));
+      String day = dayDouble.toInt().toString();
+      double hourDouble = (leftTime/(60*60)%24);
+      String hour = hourDouble.toInt().toString();
+      double minDouble = (leftTime / 60 % 60);
+      String min = minDouble.toInt().toString();
+      String s = (leftTime % 60).toString();
+      timeString = "$day天$hour小时$min分$s秒";
       setState(() {
-        timeDownCount = tick.toString();
+//        timeDownCount = tick.toInt().toString();
+        timeDownCount = "$day天$hour小时$min分$s秒";
       });
-      LogUtil.e("countDown:" + tick.toInt().toString());
+//      LogUtil.e("countDown:" + tick.toInt().toString());
     });
     timerCountDown.startCountDown();
+    return timeString;
   }
+
+  getDateUtil(){
+   print(DateUtil.getNowDateMs()); 
+   print(DateUtil.getNowDateStr());
+   print(DateUtil.getDateStrByTimeStr("1992-04-02"));
+   print(DateUtil.getDateStrByMs(1547199625201)); //根据时间戳获取时间
+   print(DateUtil.getDateStrByMs(1547199625201,format: DateFormat.ZH_NORMAL)); //根据时间戳获取时间
+   print(DateUtil.getDateStrByMs(1547199625201,format: DateFormat.ZH_YEAR_MONTH_DAY)); //根据时间戳获取时间
+   print(DateUtil.getDateStrByDateTime(DateTime.now()));
+   print(DateTime.now());
+   print(DateUtil.getDayOfYear(DateTime(2019,11,3)));
+  }
+
 
   @override
   void dispose() {
     //为了避免内存泄露，需要调用_controller.dispose
     timerUtil.cancel();
+    timerCountDown.cancel();
     super.dispose();
   }
 
@@ -62,7 +88,8 @@ class _TextFieldPageState extends State<TextFieldPage> {
                 print("onChange:$v");
               },
             ),
-            Text("${timeDownCount}s"),
+            Text(timeDownCount),
+            Text(timeDown()!= null?timeDown():'11111'),
             new RaisedButton(
               onPressed: (){
                 print(_unameController.text);
@@ -77,7 +104,6 @@ class _TextFieldPageState extends State<TextFieldPage> {
             ),
             new FlatButton(
               onPressed: (){
-                print(1111);
                 timeDown();
               },
               child: Text('flatBtn'),
@@ -88,7 +114,9 @@ class _TextFieldPageState extends State<TextFieldPage> {
               colorBrightness: Brightness.dark,
             ),
             new OutlineButton(
-              onPressed: null,
+              onPressed: (){
+                getDateUtil();
+              },
               child: Text('OutlineBtn'),
               color: Colors.blue,
               highlightColor: Colors.blue[700],
