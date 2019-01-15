@@ -111,10 +111,8 @@ class _GridListDemoState extends State<GridListDemo> {
       pageIndex++;
     });
     getDate();
-    print(_products.length);
   }
   Future onRefresh() async {
-    print('刷新列表');
     setState(() {
       pageIndex = 1;
       _products = [];
@@ -135,16 +133,18 @@ class _GridListDemoState extends State<GridListDemo> {
       noMoreData = true;
     });
     ApiConfig.getProductList({
-      "topcate": "",
-      "subcate": "",
+      "q":"",
       "page": pageIndex,
       "pageSize": 10,
-      "ptype": "",
-      "sort": ""
+      "cid":1001,
+      "has_coupon":true,
+      "start_price":"",
+      "end_price":"",
+      "need_free_shipment":"",
+      "sort":"total_sales_des",
     }).then((res){
       print(res.data.data);
       if(res.data.data !=null && res.data.data['data'].length > 0){
-        print(res.data);
         List listData = res.data.data['data'];
         listData.forEach((item){
           _products.add(ProductItem(
@@ -191,19 +191,15 @@ class _GridListDemoState extends State<GridListDemo> {
     _controller.addListener((){
       if (_controller.position.pixels ==
           _controller.position.maxScrollExtent) {
-        print('滑动到了最底部');
         moreList();
       }
-      print(_controller.offset);
       if(_controller.offset >= 500){
-        print(showToTop);
         if(showToTop){
           setState(() {
             showToTop = false;
           });
         }
       }else {
-        print(showToTop);
         if(!showToTop){
           setState(() {
             showToTop = true;

@@ -7,6 +7,7 @@ import './sliver_app_bar.dart';
 import './fourth.dart';
 import '../routers/routes.dart';
 import '../routers/application.dart';
+import './horse_home.dart';
 enum ActionItems {
   GROUP_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT,HELP
 }
@@ -88,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
     _pageController = PageController(initialPage: _currentIndex);
     _pages = [
-      SliverAppbarPage(),
+      HorseHome(),
       HorseList(),
       Fourth(),
       ConversationPage(),

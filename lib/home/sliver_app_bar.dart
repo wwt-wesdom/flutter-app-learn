@@ -132,7 +132,7 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
         new SliverAppBar(
 //          控制tab是否消失
           pinned: true,
-          title: Container(
+          title: new Container(
             color: Colors.white10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

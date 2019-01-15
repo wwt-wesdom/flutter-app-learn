@@ -19,23 +19,27 @@ class _TimeDownState extends State<TimeDown> {
   String timeString;
   timeDown(time){
     if (time - DateUtil.getNowDateMs() <= 0){
-      return '倒计时结束';
-    }
-    timerCountDown.setOnTimerTickCallback((int value){
-      double tick = (value/1000);
-      int leftTime = tick.toInt();
-      double dayDouble = (leftTime/(24*60*60));
-      String day = dayDouble.toInt().toString();
-      double hourDouble = (leftTime/(60*60)%24);
-      String hour = hourDouble.toInt().toString();
-      double minDouble = (leftTime / 60 % 60);
-      String min = minDouble.toInt().toString();
-      String s = (leftTime % 60).toString();
       setState(() {
-        timeString = "$day天$hour小时$min分$s秒";
+        timeString = '倒计时结束';
       });
-    });
-    timerCountDown.startCountDown();
+      return;
+    }else{
+      timerCountDown.setOnTimerTickCallback((int value){
+        double tick = (value/1000);
+        int leftTime = tick.toInt();
+        double dayDouble = (leftTime/(24*60*60));
+        String day = dayDouble.toInt().toString();
+        double hourDouble = (leftTime/(60*60)%24);
+        String hour = hourDouble.toInt().toString();
+        double minDouble = (leftTime / 60 % 60);
+        String min = minDouble.toInt().toString();
+        String s = (leftTime % 60).toString();
+        setState(() {
+          timeString = "$day天$hour小时$min分$s秒";
+        });
+      });
+      timerCountDown.startCountDown();
+    }
   }
   @override
   void dispose(){
