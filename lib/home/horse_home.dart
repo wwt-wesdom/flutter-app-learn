@@ -51,17 +51,17 @@ Widget _todayHotSellItem(item){
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            width: 200.0,
-            height: 200.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: Colors.blue,
-                image: DecorationImage(
-                    image: NetworkImage(item.img),
-                    fit: BoxFit.cover
-                )
+          ClipRRect(
+            child: SizedBox(
+              width: 200.0,
+              height: 200.0,
+              child: FadeInImage.assetNetwork(
+                placeholder: 'assets/images/glnz.jpg',
+                image: item.img,
+                fit: BoxFit.fill,
+              ),
             ),
+            borderRadius: BorderRadius.circular(5.0),
           ),
           Container(height: 3.0,),
           Text(item.title,overflow: TextOverflow.ellipsis,),
@@ -117,6 +117,8 @@ Widget _todayHotSellItem(item){
 
 
 class _HorseHomeState extends State<HorseHome> {
+  ScrollController _controller = new ScrollController();
+  bool showToTop = true;
   List imgListSwiperTwo = [
     Image.asset('assets/images/food01.jpeg',fit: BoxFit.cover,),
     Image.asset('assets/images/food02.jpeg',fit: BoxFit.cover,),
@@ -128,6 +130,22 @@ class _HorseHomeState extends State<HorseHome> {
 
   void initState(){
     super.initState();
+    _controller.addListener((){
+      if(_controller.offset >= 500){
+        if(showToTop){
+          setState(() {
+            showToTop = false;
+          });
+          print(showToTop);
+        }
+      }else {
+        if(!showToTop){
+          setState(() {
+            showToTop = true;
+          });
+        }
+      }
+    });
     getBanner();
     getChengQunNewsList();
     getRecommendList();
@@ -199,6 +217,7 @@ class _HorseHomeState extends State<HorseHome> {
         title: Text("天马折扣-首页"),
       ),
       body: CustomScrollView(
+        controller: _controller,
         slivers: <Widget>[
           new SliverToBoxAdapter(
             child: Container(
@@ -342,6 +361,14 @@ class _HorseHomeState extends State<HorseHome> {
             }).toList(),
           )
         ],
+      ),
+      floatingActionButton: showToTop ? null : FloatingActionButton(
+        onPressed: (){
+          _controller.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+        },
+        child: Icon(Icons.arrow_upward),
+        clipBehavior: Clip.none,
+        tooltip: '长按显示这个',
       ),
     );
   }
