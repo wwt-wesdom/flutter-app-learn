@@ -230,6 +230,14 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                     onPressed: (){
                       Application.router.navigateTo(context, "/video-player-demo");
                     },
+                  ),
+                  new Container(width: 5.0,),
+                  new RaisedButton(
+                    color: Colors.pink,
+                    child: Text('animation',style: TextStyle(color: Colors.white)),
+                    onPressed: (){
+                      Application.router.navigateTo(context, "/animation-demo");
+                    },
                   )
                 ],
               )

@@ -13,6 +13,7 @@ import '../home/scroll_tabs_demo.dart';
 import '../home/grid_list_demo.dart';
 import '../home/shared_preferences_demo.dart';
 import '../home/video_player_demo.dart';
+import '../home/animation_demo.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -92,6 +93,12 @@ Handler sharedPreferencesDemoHandler = Handler(
 Handler videoPlayerDemoHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return VideoPlayerDemo();
+    }
+);
+
+Handler animationDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return AnimationDemo();
     }
 );
 
