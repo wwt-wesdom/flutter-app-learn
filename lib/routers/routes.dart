@@ -18,6 +18,8 @@ class Routes {
   static String sharedPreferencesDemo = "/shared-preferences-demo";
   static String videoPlayerDemo = "/video-player-demo";
   static String animationDemo = "/animation-demo";
+  static String countBlocDemo = "/count-bloc-demo";
+  static String countIncrement = "/count-increment";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -39,5 +41,7 @@ class Routes {
     router.define(sharedPreferencesDemo, handler: sharedPreferencesDemoHandler);
     router.define(videoPlayerDemo, handler: videoPlayerDemoHandler);
     router.define(animationDemo, handler: animationDemoHandler);
+    router.define(countBlocDemo, handler: countBlocDemoHandler);
+    router.define(countIncrement, handler: countIncrementHandler);
   }
 }

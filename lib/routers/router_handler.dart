@@ -14,6 +14,8 @@ import '../home/grid_list_demo.dart';
 import '../home/shared_preferences_demo.dart';
 import '../home/video_player_demo.dart';
 import '../home/animation_demo.dart';
+import '../home/count_bloc_demo.dart';
+import '../home/count_increment.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -99,6 +101,18 @@ Handler videoPlayerDemoHandler = Handler(
 Handler animationDemoHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return AnimationDemo();
+    }
+);
+
+Handler countBlocDemoHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return CountBlocDemo();
+    }
+);
+
+Handler countIncrementHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return CountIncrement();
     }
 );
 

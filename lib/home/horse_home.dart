@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import '../api/index.dart';
+import 'package:flutter_app/blocs/home__banner_block.dart';
 
 class HorseHome extends StatefulWidget {
   @override
   _HorseHomeState createState() => _HorseHomeState();
-}
-//轮播图 Model
-class SwiperListItem {
-  final String imgUrl;
-  final int id;
-  final String adUrl;
-  SwiperListItem({this.imgUrl,this.id,this.adUrl});
 }
 //今日热销 Model
 class TodayHotSellItem {
@@ -124,12 +118,13 @@ class _HorseHomeState extends State<HorseHome> {
     Image.asset('assets/images/food02.jpeg',fit: BoxFit.cover,),
     Image.asset('assets/images/food03.jpeg',fit: BoxFit.cover,)
   ];
-  List<SwiperListItem> imgListSwiper = [];
   List<TodayHotSellItem> todayHotSell = [];
   List<TodayHotSellItem> recommendList = [];
-
+  HomeBanner bloc;
   void initState(){
     super.initState();
+    bloc = HomeBanner();
+    bloc.getBanner();
     _controller.addListener((){
       if(_controller.offset >= 500){
         if(showToTop){
@@ -146,25 +141,10 @@ class _HorseHomeState extends State<HorseHome> {
         }
       }
     });
-    getBanner();
     getChengQunNewsList();
     getRecommendList();
   }
-  void getBanner() {
-    ApiConfig.getBannerList({
-      "adType": "h5_home_page"
-    }).then((res){
-      print(res.data.data);
-      List data = res.data.data;
-      List<SwiperListItem> imgList = [];
-      data.forEach((item){
-        imgList.add(SwiperListItem(imgUrl: item["adImg"],id: item["id"],adUrl: item["adUrl"]));
-      });
-      setState(() {
-        imgListSwiper = imgList;
-      });
-    });
-  }
+
 // 今日热销数据获取
   void getChengQunNewsList() {
     ApiConfig.getChengQunNewsList({
@@ -210,8 +190,15 @@ class _HorseHomeState extends State<HorseHome> {
       print(recommendDataList.length);
     });
   }
+  List<SwiperListItem> list = [];
+  @override
+  void dispose() {
+    bloc?.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+//    final bloc = BlocProvider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("天马折扣-首页"),
@@ -242,25 +229,32 @@ class _HorseHomeState extends State<HorseHome> {
             ),
           ),
           new SliverToBoxAdapter(
-            child: Container(
-              height: 200,
-              child: Swiper(
-                autoplay: true,
-                itemCount: 3,
-                itemBuilder: (BuildContext context,int index){
-                  if(imgListSwiper.length == 0){
-                    return imgListSwiperTwo[index];
-                  }else{
-                    return _swiperListItem(imgListSwiper[index]);
-                  }
-                },
-                pagination: new SwiperPagination(
-                  builder: DotSwiperPaginationBuilder(
-                    color: Colors.black54,
-                    activeColor: Colors.white,
-                )),
+            child: StreamBuilder(
+              stream: bloc.homeBannerStream,
+              initialData: list,
+              builder: (BuildContext context,AsyncSnapshot<List<SwiperListItem>> snapshot){
+                print(snapshot.data);
+                return Container(
+                  height: 200,
+                  child: Swiper(
+                    autoplay: true,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context,int index){
+                      if(snapshot.data.length == 0){
+                        return imgListSwiperTwo[index];
+                      }else{
+                        return _swiperListItem(snapshot.data[index]);
+                      }
+                    },
+                    pagination: new SwiperPagination(
+                        builder: DotSwiperPaginationBuilder(
+                          color: Colors.black54,
+                          activeColor: Colors.white,
+                        )),
 //                control: new SwiperControl(),
-              ),
+                  ),
+                );
+              }
             )
           ),
           new SliverToBoxAdapter(
@@ -353,12 +347,30 @@ class _HorseHomeState extends State<HorseHome> {
               ],
             ),
           ),
+          new Container(
+            child: new SliverGrid.count(
+              crossAxisCount: 2,
+              childAspectRatio: 0.64,
+              children: recommendList.map((product){
+                return _todayHotSellItem(product);
+              }).toList(),
+            ),
+          ),
           new SliverGrid.count(
             crossAxisCount: 2,
             childAspectRatio: 0.64,
             children: recommendList.map((product){
               return _todayHotSellItem(product);
             }).toList(),
+          ),
+          new Container(
+            child: new SliverGrid.count(
+              crossAxisCount: 2,
+              childAspectRatio: 0.64,
+              children: recommendList.map((product){
+                return _todayHotSellItem(product);
+              }).toList(),
+            ),
           )
         ],
       ),

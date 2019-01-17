@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import "./home/home_screen.dart";
 import 'package:flutter_redux/flutter_redux.dart';
 import 'store/store.dart';
+import 'package:flutter_app/blocs/bloc_provider.dart';
+
 import "./constants.dart" show AppColors;
 void main() => runApp(MyApp());
-class MyApp extends StatelessWidget {
+/*class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreProvider(
@@ -33,6 +35,22 @@ class App extends StatelessWidget {
           }
       );
     }
+  }*/
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      child: MaterialApp(
+        title: '微信',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          cardColor: Colors.white,
+        ),
+        home: HomeScreen(),
+      ),
+    );
   }
+}
 
 
