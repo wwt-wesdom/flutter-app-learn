@@ -149,6 +149,7 @@ class _HorseListState extends State<HorseList> {
           time: item['createTime']
       ));
      });
+     if(!mounted) return;
      setState(() {
       mokSkyHorseList.addAll(_mokSkyHorseList);
      });

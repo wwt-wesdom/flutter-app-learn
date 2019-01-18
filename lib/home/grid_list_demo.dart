@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import '../api/index.dart';
+import 'package:flutter_app/blocs/grid_list_bloc.dart';
 
 class GridListDemo extends StatefulWidget {
   @override
   _GridListDemoState createState() => _GridListDemoState();
 }
+/*
 
 class ProductItem {
   final String name;
   final String asset;
   ProductItem({this.name,this.asset});
 }
+*/
 
 Widget _buildItemGrid(ProductItem product) {
   return Padding(
@@ -21,7 +24,7 @@ Widget _buildItemGrid(ProductItem product) {
       color: Colors.white,
       child: Container(
         alignment: Alignment.topCenter,
-        padding: EdgeInsets.only(top:20.0),
+        padding: EdgeInsets.only(top: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,10 +41,12 @@ Widget _buildItemGrid(ProductItem product) {
               ),
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
-            Container(height: 10.0,),
+            Container(
+              height: 10.0,
+            ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(top: 6.0,left: 3.0,right: 3.0),
+                padding: EdgeInsets.only(top: 6.0, left: 3.0, right: 3.0),
                 child: Text(
                   product.name,
                   textAlign: TextAlign.center,
@@ -58,10 +63,11 @@ Widget _buildItemGrid(ProductItem product) {
 }
 
 class _GridListDemoState extends State<GridListDemo> {
+  GridList bloc;
   List<ProductItem> _products = [];
   bool noMoreData = true;
   bool loading = true;
-  bool showToTop = true;
+  bool showToTop = false;
   List<ProductItem> _productsTwo = [
     ProductItem(
       name: 'Bueno Chocolate',
@@ -106,12 +112,14 @@ class _GridListDemoState extends State<GridListDemo> {
   ];
   int pageIndex = 1;
   ScrollController _controller = ScrollController();
-  Future moreList() async{
+
+  Future moreList() async {
     setState(() {
       pageIndex++;
     });
     getDate();
   }
+
   Future onRefresh() async {
     setState(() {
       pageIndex = 1;
@@ -119,98 +127,78 @@ class _GridListDemoState extends State<GridListDemo> {
     });
     getDate();
   }
-  getDate(){
+
+  getDate() {
     /*setState(() {
       _products.addAll(_productsTwo);
     });*/
     dioText();
   }
 
-  void dioText() async{
+  void dioText() async {
     Dio dio = Dio();
     setState(() {
       loading = false;
       noMoreData = true;
     });
     ApiConfig.getProductList({
-      "q":"",
+      "q": "",
       "page": pageIndex,
       "pageSize": 10,
-      "cid":1001,
-      "has_coupon":true,
-      "start_price":"",
-      "end_price":"",
-      "need_free_shipment":"",
-      "sort":"total_sales_des",
-    }).then((res){
-      print(res.data.data);
-      if(res.data.data !=null && res.data.data['data'].length > 0){
+      "cid": 1001,
+      "has_coupon": true,
+      "start_price": "",
+      "end_price": "",
+      "need_free_shipment": "",
+      "sort": "total_sales_des",
+    }).then((res) {
+      if (res.data.data != null && res.data.data['data'].length > 0) {
         List listData = res.data.data['data'];
-        listData.forEach((item){
-          _products.add(ProductItem(
-              name: item['title'],
-              asset: item['picUrl']
-          ));
+        listData.forEach((item) {
+          _products
+              .add(ProductItem(name: item['title'], asset: item['picUrl']));
         });
         setState(() {
           _products = _products;
           loading = true;
         });
-      }else{
+      } else {
         setState(() {
           loading = true;
           noMoreData = false;
         });
       }
     });
-   /* Response response = await dio.get("http://192.168.100.133:8099/api/coupon/every-special-offer.json?topcate=&subcate=&page=$pageIndex&pageSize=10&ptype=&sort=");
-    if(response.data['data'] !=null && response.data['data']['data'].length > 0){
-      List listData = response.data['data']['data'];
-      listData.forEach((item){
-        _products.add(ProductItem(
-            name: item['title'],
-            asset: item['picUrl']
-        ));
-      });
-      setState(() {
-        _products = _products;
-        loading = true;
-      });
-    }else{
-      setState(() {
-        loading = true;
-        noMoreData = false;
-      });
-    }*/
   }
 
-  void initState(){
+  void initState() {
     super.initState();
+    bloc = GridList();
+    int pageIndex = 1;
+    bloc.getGridList(pageIndex);
     toList();
     getDate();
-    _controller.addListener((){
-      if (_controller.position.pixels ==
-          _controller.position.maxScrollExtent) {
-        moreList();
+    _controller.addListener(() {
+      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+        bloc.getGridList(pageIndex++);
       }
-      if(_controller.offset >= 500){
-        if(showToTop){
-          setState(() {
-            showToTop = false;
-          });
+      if (_controller.offset >= 500) {
+        if (!showToTop) {
+          showToTop = true;
+          bloc.changeData(true);
         }
-      }else {
-        if(!showToTop){
-          setState(() {
-            showToTop = true;
-          });
+      } else {
+        if (showToTop) {
+          showToTop = false;
+          bloc.changeData(false);
         }
       }
     });
   }
-  void toList(){
+
+  void toList() {
     var list = '["1","2"]';
-   var decoded = json.decode(list);
+    var decoded = json.decode(list);
   }
 
   @override
@@ -222,74 +210,78 @@ class _GridListDemoState extends State<GridListDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('GridListDemo'),
-      ),
-      body: RefreshIndicator(
-        child: new Stack(
-          children: <Widget>[
-            new CustomScrollView(
-              controller: _controller,
-              slivers: <Widget>[
-                new SliverGrid.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1,
-                  children: _products.map((product){
-                    return _buildItemGrid(product);
-                  }).toList(),
-                ),
-                new SliverToBoxAdapter(
-                  child: Offstage(
-                    offstage: loading,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Container(
-                        child: Center(
-                          child: Text('正在加载中...',style: TextStyle(color: Colors.red),),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                new SliverToBoxAdapter(
-                  child: Offstage(
-                    offstage: noMoreData,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Container(
-                        /* decoration: BoxDecoration(
-                      border: Border(
-                        top: BorderSide(color: Colors.pink,width: 10.0)
-                      )
-                    ),*/
-                        child: Center(
-                          child: Text('没有更多数据了！',style: TextStyle(color: Colors.red),),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
+    return StreamBuilder(
+        stream: bloc.gridListStream,
+        builder: (BuildContext context, AsyncSnapshot<ResMap> snapshot) {
+          print(snapshot.data != null ? snapshot.data.goTop : null);
+          return new Scaffold(
+            appBar: AppBar(
+              title: Text('GridListDemo'),
             ),
-            new Positioned(
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 1000),
-                opacity: showToTop?0.0:1.0,
-                child: FloatingActionButton(
-                  onPressed: (){
-                    _controller.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
-                  },
-                  child: Icon(Icons.arrow_upward),
+            body: new RefreshIndicator(
+                child: new CustomScrollView(
+                  controller: _controller,
+                  slivers: <Widget>[
+                    //列表
+                    new SliverGrid.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1,
+                      children: snapshot.data != null &&
+                              snapshot.data.listData.length > 0
+                          ? snapshot.data.listData.map((product) {
+                              return _buildItemGrid(product);
+                            }).toList()
+                          : <Widget>[],
+                    ),
+                    new SliverToBoxAdapter(
+                      child: Offstage(
+                        offstage: snapshot.data == null?false:snapshot.data.loading,
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Container(
+                            child: Center(
+                              child: Text(
+                                '正在加载中...',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    new SliverToBoxAdapter(
+                      child: Offstage(
+                        offstage: noMoreData,
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Container(
+                            child: Center(
+                              child: Text(
+                                '没有更多数据了！',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              bottom: 50.0,
-              right: 20.0,
-            )
-          ],
-        ),
-        onRefresh: onRefresh
-      ),
-    );
+                onRefresh: onRefresh
+            ),
+            floatingActionButton: snapshot.data != null && snapshot.data.goTop
+                ? FloatingActionButton(
+                    onPressed: () {
+                      _controller.animateTo(0,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease);
+                    },
+                    child: Icon(Icons.arrow_upward),
+                    clipBehavior: Clip.none,
+                    tooltip: '长按显示这个',
+                  )
+                : null,
+          );
+        });
   }
 }

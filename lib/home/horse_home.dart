@@ -184,10 +184,10 @@ class _HorseHomeState extends State<HorseHome> {
       data.forEach((item){
         recommendDataList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"] ));
       });
+      if(!mounted) return;
       setState(() {
         recommendList = recommendDataList;
       });
-      print(recommendDataList.length);
     });
   }
   List<SwiperListItem> list = [];
