@@ -20,6 +20,8 @@ class Routes {
   static String animationDemo = "/animation-demo";
   static String countBlocDemo = "/count-bloc-demo";
   static String countIncrement = "/count-increment";
+  static String horseHome = "/horse-home";
+  static String homeScreen = "/home-screen";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -43,5 +45,7 @@ class Routes {
     router.define(animationDemo, handler: animationDemoHandler);
     router.define(countBlocDemo, handler: countBlocDemoHandler);
     router.define(countIncrement, handler: countIncrementHandler);
+    router.define(horseHome, handler: horseHomeHandler);
+    router.define(homeScreen, handler: homeScreenHandler);
   }
 }

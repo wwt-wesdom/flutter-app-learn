@@ -9,6 +9,7 @@ import './five.dart';
 import '../routers/routes.dart';
 import '../routers/application.dart';
 import './horse_home.dart';
+import 'package:flutter_app/blocs/app_init/bloc_init_page.dart';
 enum ActionItems {
   GROUP_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT,HELP
 }

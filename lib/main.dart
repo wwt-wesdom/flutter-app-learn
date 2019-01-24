@@ -3,6 +3,7 @@ import "./home/home_screen.dart";
 import 'package:flutter_redux/flutter_redux.dart';
 import 'store/store.dart';
 import 'package:flutter_app/blocs/bloc_provider.dart';
+import 'package:flutter_app/blocs/app_init/bloc_init_page.dart';
 
 import "./constants.dart" show AppColors;
 void main() => runApp(MyApp());
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           cardColor: Colors.white,
         ),
-        home: HomeScreen(),
+        home: InitializationPage(),
       ),
     );
   }

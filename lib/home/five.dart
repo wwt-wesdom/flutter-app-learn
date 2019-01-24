@@ -23,7 +23,11 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
     Clipboard.setData(new ClipboardData(text: text));
     Toast.toast(context: context,msg: '复制成功');
   }
-
+  @override
+  void initState() {
+    super.initState();
+    print("five");
+  }
   @override
   Widget build(BuildContext context) {
     List<Widget> bottomList = [];
@@ -230,6 +234,14 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                 child: Text('countBloc',style: TextStyle(color: Colors.white)),
                 onPressed: (){
                   Application.router.navigateTo(context, "/count-bloc-demo");
+                },
+              ),
+              new Container(width: 5.0,),
+              new RaisedButton(
+                color: Colors.blue,
+                child: Text('categoies',style: TextStyle(color: Colors.white)),
+                onPressed: (){
+                  Application.router.navigateTo(context, "/categories");
                 },
               ),
             ],

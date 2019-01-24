@@ -28,6 +28,15 @@ class _CategoriesState extends State<Categories> {
     {'showRight':true,'text':'women cloth','colorRight':true},
     {'showRight':true,'text':'women cloth','colorRight':true},
     {'showRight':true,'text':'women cloth','colorRight':true},
+    {'showRight':true,'text':'women cloth','colorRight':true},
+    {'showRight':true,'text':'women cloth','colorRight':true},
+    {'showRight':true,'text':'women cloth','colorRight':true},
+    {'showRight':true,'text':"women's cloth gogogogogo",'colorRight':true},
+    {'showRight':true,'text':"women's cloth",'colorRight':true},
+    {'showRight':true,'text':"womennnnnn's cloth",'colorRight':true},
+    {'showRight':true,'text':"women's cloth",'colorRight':true},
+    {'showRight':true,'text':"women's cloth",'colorRight':true},
+    {'showRight':true,'text':"women's cloth",'colorRight':true},
   ];
   getList (length){
     imageList.clear();
@@ -61,7 +70,7 @@ class _CategoriesState extends State<Categories> {
       body: Container(
         child: Row(
           children: <Widget>[
-            Container(
+            new Container(
               width: 100.0,
               child: ListView.builder(
                 itemBuilder: (BuildContext context,int index) {
@@ -77,12 +86,10 @@ class _CategoriesState extends State<Categories> {
                     ),
                     child: InkWell(
                       child: Container(
-                        padding: EdgeInsets.only(
-                            top: 10.0,
-                            left: 10.0,
-                            bottom: 10.0
+                        padding: EdgeInsets.all(
+                           10.0
                         ),
-                        child: Text(categoriesLeft[index]['text'],style: TextStyle(fontSize: 12,wordSpacing: 2)),
+                        child: Text(categoriesLeft[index]['text'],style: TextStyle(fontSize: 12,),softWrap:true,),
                       ),
                       onTap: (){
                         setState(() {
@@ -103,7 +110,7 @@ class _CategoriesState extends State<Categories> {
                 itemCount: categoriesLeft.length,
               ),
             ),
-            Expanded(
+            new Expanded(
                 child: Container(
                   padding: EdgeInsets.all(10.0),
                   child: CustomScrollView(
@@ -128,6 +135,7 @@ class _CategoriesState extends State<Categories> {
                                 return Column(
                                   children: <Widget>[
                                     Image.asset('assets/images/glnz.jpg',fit: BoxFit.cover),
+                                    Container(height: 10,),
                                     Text('glnz')
                                   ],
                                 );
@@ -138,7 +146,7 @@ class _CategoriesState extends State<Categories> {
                             crossAxisCount: 3,
                             mainAxisSpacing: 0,
                             crossAxisSpacing: 0,
-                            childAspectRatio: 1.2,
+                            childAspectRatio: 1,
                           )
                       ),
                       SliverList(

@@ -125,6 +125,7 @@ class _HorseListState extends State<HorseList> {
   List<SkyHorseList> mokSkyHorseList = [];
   void initState(){
     super.initState();
+    print("horser_list");
     dioText();
   }
 

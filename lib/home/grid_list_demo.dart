@@ -274,7 +274,7 @@ class _GridListDemoState extends State<GridListDemo> {
                     onPressed: () {
                       _controller.animateTo(0,
                           duration: Duration(milliseconds: 500),
-                          curve: Curves.ease);
+                          curve: Curves.linear);
                     },
                     child: Icon(Icons.arrow_upward),
                     clipBehavior: Clip.none,

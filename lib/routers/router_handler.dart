@@ -16,6 +16,8 @@ import '../home/video_player_demo.dart';
 import '../home/animation_demo.dart';
 import '../home/count_bloc_demo.dart';
 import '../home/count_increment.dart';
+import '../home/horse_home.dart';
+import '../home/home_screen.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -113,6 +115,18 @@ Handler countBlocDemoHandler = Handler(
 Handler countIncrementHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return CountIncrement();
+    }
+);
+
+Handler horseHomeHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return HorseHome();
+    }
+);
+
+Handler homeScreenHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return HomeScreen();
     }
 );
 

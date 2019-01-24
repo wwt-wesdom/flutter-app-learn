@@ -123,6 +123,7 @@ class _HorseHomeState extends State<HorseHome> {
   HomeBanner bloc;
   void initState(){
     super.initState();
+    print("horse_home");
     bloc = HomeBanner();
     bloc.getBanner();
     _controller.addListener((){
@@ -131,7 +132,6 @@ class _HorseHomeState extends State<HorseHome> {
           setState(() {
             showToTop = false;
           });
-          print(showToTop);
         }
       }else {
         if(!showToTop){
@@ -157,7 +157,6 @@ class _HorseHomeState extends State<HorseHome> {
       "favoritesId": 18806351
     }).then( (res){
       List<TodayHotSellItem> todayHotSellList = [];
-      print(res.data.data["data"]["data"]);
       List data = res.data.data["data"]["data"];
       data.forEach((item){
         todayHotSellList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"]/100).toString(),price: item["zkFinalPrice"] ));
@@ -178,7 +177,6 @@ class _HorseHomeState extends State<HorseHome> {
       "sort": "total_sales_des",
       "favoritesId": 18901731
     }).then( (res){
-      print(res.data.data["data"]["data"]);
       List<TodayHotSellItem> recommendDataList = [];
       List data = res.data.data["data"]["data"];
       data.forEach((item){
@@ -233,7 +231,6 @@ class _HorseHomeState extends State<HorseHome> {
               stream: bloc.homeBannerStream,
               initialData: list,
               builder: (BuildContext context,AsyncSnapshot<List<SwiperListItem>> snapshot){
-                print(snapshot.data);
                 return Container(
                   height: 200,
                   child: Swiper(
