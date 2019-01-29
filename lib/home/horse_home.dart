@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import '../api/index.dart';
 import 'package:flutter_app/blocs/home__banner_block.dart';
+import 'package:dio/dio.dart';
 
 class HorseHome extends StatefulWidget {
   @override
@@ -146,8 +147,22 @@ class _HorseHomeState extends State<HorseHome> {
   }
 
 // 今日热销数据获取
-  void getChengQunNewsList() {
-    ApiConfig.getChengQunNewsList({
+  void getChengQunNewsList() async{
+    try {
+      Response response;
+      response = await Dio().get("http://www.wwtao.top/api/grid-list.json");
+      List<TodayHotSellItem> todayHotSellList = [];
+      List data = response.data["data"];
+      data.forEach((item){
+        todayHotSellList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"].toString() ));
+      });
+      setState(() {
+        todayHotSell = todayHotSellList;
+      });
+    } catch (e){
+      print(e);
+    }
+    /*ApiConfig.getChengQunNewsList({
       "topcate":"",
       "subcate":"",
       "page": 1,
@@ -159,20 +174,35 @@ class _HorseHomeState extends State<HorseHome> {
       List<TodayHotSellItem> todayHotSellList = [];
       List data = res.data.data["data"]["data"];
       data.forEach((item){
-        todayHotSellList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"]/100).toString(),price: item["zkFinalPrice"] ));
+        todayHotSellList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"]/100).toString(),price: item["zkFinalPrice"].toString() ));
       });
       setState(() {
         todayHotSell = todayHotSellList;
       });
-    });
+    });*/
   }
 // 为你推荐数据获取
-  void getRecommendList() {
-    ApiConfig.getChengQunNewsList({
+  void getRecommendList() async{
+    try {
+      Response response;
+      response = await Dio().get("http://www.wwtao.top/api/grid-list.json");
+      List<TodayHotSellItem> recommendDataList = [];
+      List data = response.data["data"];
+      data.forEach((item){
+        recommendDataList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"].toString() ));
+      });
+      if(!mounted) return;
+      setState(() {
+        recommendList = recommendDataList;
+      });
+    } catch (e){
+      print(e);
+    }
+   /* ApiConfig.getChengQunNewsList({
       "topcate":"",
       "subcate":"",
       "page": 1,
-      "pageSize": 10,
+      "pageSize": 20,
       "ptype":"",
       "sort": "total_sales_des",
       "favoritesId": 18901731
@@ -186,7 +216,7 @@ class _HorseHomeState extends State<HorseHome> {
       setState(() {
         recommendList = recommendDataList;
       });
-    });
+    });*/
   }
   List<SwiperListItem> list = [];
   @override

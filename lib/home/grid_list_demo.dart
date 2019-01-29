@@ -136,7 +136,7 @@ class _GridListDemoState extends State<GridListDemo> {
   }
 
   void dioText() async {
-    Dio dio = Dio();
+
     setState(() {
       loading = false;
       noMoreData = true;

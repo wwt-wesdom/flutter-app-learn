@@ -53,15 +53,16 @@ class _TextFieldPageState extends State<TextFieldPage> {
   }
 
   getDateUtil(){
-   print(DateUtil.getNowDateMs()); 
-   print(DateUtil.getNowDateStr());
+//   print(DateUtil.getNowDateMs());
+//   print(DateUtil.getNowDateStr());
    print(DateUtil.getDateStrByTimeStr("1992-04-02"));
-   print(DateUtil.getDateStrByMs(1547199625201)); //根据时间戳获取时间
-   print(DateUtil.getDateStrByMs(1547199625201,format: DateFormat.ZH_NORMAL)); //根据时间戳获取时间
-   print(DateUtil.getDateStrByMs(1547199625201,format: DateFormat.ZH_YEAR_MONTH_DAY)); //根据时间戳获取时间
-   print(DateUtil.getDateStrByDateTime(DateTime.now()));
+   print(DateUtil.getDateStrByTimeStr("2019-01-28T08:26:04+0000"));
+//   print(DateUtil.getDateStrByMs(1547199625201)); //根据时间戳获取时间
+//   print(DateUtil.getDateStrByMs(1547199625201,format: DateFormat.ZH_NORMAL)); //根据时间戳获取时间
+//   print(DateUtil.getDateStrByMs(1547199625201,format: DateFormat.ZH_YEAR_MONTH_DAY)); //根据时间戳获取时间
+//   print(DateUtil.getDateStrByDateTime(DateTime.now()));
    print(DateTime.now());
-   print(DateUtil.getDayOfYear(DateTime(2019,11,3)));
+//   print(DateUtil.getDayOfYear(DateTime(2019,11,3)));
   }
 
 
@@ -148,7 +149,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
               } ,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-          new Container(
+            new Container(
             child: new Container(
 //              color: Colors.purple,
               child: new Text(" ", style: new TextStyle(fontSize: 20.0)),
@@ -168,6 +169,32 @@ class _TextFieldPageState extends State<TextFieldPage> {
               borderRadius: BorderRadius.circular(100.0)
             ),
             margin: const EdgeInsets.all(20.0),
+            ),
+            new Container(
+//              color: Colors.yellow,
+              height: 38,
+              padding: EdgeInsets.only(left: 10.0,right: 10.0),
+              child: new DropdownButtonHideUnderline(
+                  child:  new DropdownButton(
+                      hint: Row(
+                        children: <Widget>[
+                          Icon(Icons.account_balance_wallet),
+                          Text('asdfasd'),
+                        ],
+                      ),
+                      isDense: true,
+                      items: [
+                        new DropdownMenuItem(child: Text("11111"),value: 11111,),
+                        new DropdownMenuItem(child: Text("22222"),value: 22222,),
+                        new DropdownMenuItem(child: Text("33333"),value: 33333,),
+                        new DropdownMenuItem(child: Text("44444"),value: 44444,),
+                        new DropdownMenuItem(child: Text("55555"),value: 55555,),
+                      ],
+                      onChanged: (value){
+
+                      }
+                  )
+              ),
             )
           ],
         ),

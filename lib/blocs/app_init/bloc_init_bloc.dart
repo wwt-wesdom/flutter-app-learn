@@ -18,7 +18,7 @@ class ApplicationInitializationBloc
     }
 
     if (event.type == ApplicationInitializationEventType.start) {
-      for (int progress = 0; progress < 101; progress += 10){
+      for (int progress = 0; progress < 101; progress += 20){
         await Future.delayed(const Duration(milliseconds: 300));
         yield ApplicationInitializationState.progressing(progress);
       }

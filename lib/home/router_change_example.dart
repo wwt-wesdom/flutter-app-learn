@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:core';
 class ArticleDetail extends StatefulWidget {
   @override
-  _ArticleDetailState createState() => _ArticleDetailState(articleId,title);
+  _ArticleDetailState createState() => _ArticleDetailState();
   final String articleId;
   final String title;
 
@@ -10,21 +10,19 @@ class ArticleDetail extends StatefulWidget {
 }
 
 class _ArticleDetailState extends State<ArticleDetail> {
-  final String articleId;
-  final String title;
-  _ArticleDetailState(this.articleId,this.title);
+
   var b = 10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(widget.title),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Center(
-              child: Text("这篇文章的id是$articleId"),
+              child: Text("这篇文章的id是${widget.articleId}"),
             ),
             Center(
               child: RaisedButton(

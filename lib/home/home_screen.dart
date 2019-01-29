@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _pageController = PageController(initialPage: _currentIndex);
     _pages = [
       HorseHome(),
-      HorseList(),
+      SliverAppbarPage(),
       Five(),
       ConversationPage(),
     ];
@@ -112,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     final BottomNavigationBar botNavBar = BottomNavigationBar(
@@ -128,8 +129,9 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       },
     );
-    return Scaffold(
-     /* appBar: new AppBar(
+    return new WillPopScope(
+        child: Scaffold(
+          /* appBar: new AppBar(
         elevation: 0,
         title: Text('微信'),
         actions: <Widget>[
@@ -175,19 +177,34 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(width: 10.0)
         ],
       ),*/
-      body: PageView.builder(
-         itemBuilder: (BuildContext context,int index){
-            return _pages[index];
-         },
-         controller: _pageController,
-         itemCount: _pages.length,
-         onPageChanged: (int index) {
-           setState(() {
-             _currentIndex = index;
-           });
-         },
-       ),
-      bottomNavigationBar: botNavBar,
+          body: PageView.builder(
+            itemBuilder: (BuildContext context,int index){
+              return _pages[index];
+            },
+            controller: _pageController,
+            itemCount: _pages.length,
+            onPageChanged: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
+          bottomNavigationBar: botNavBar,
+        ),
+        onWillPop: (){
+          print(111111);
+          showDialog(
+            context: context,
+            child: new AlertDialog(content: new Text('退出当前界面'), actions: [
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text('确定'))
+            ]),
+          );
+        },
     );
   }
 }
