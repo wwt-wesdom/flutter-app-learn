@@ -10,8 +10,7 @@ class ApplicationInitializationBloc
   );
 
   @override
-  Stream<ApplicationInitializationState> eventHandler(
-      ApplicationInitializationEvent event, ApplicationInitializationState currentState) async* {
+  Stream<ApplicationInitializationState> eventHandler(ApplicationInitializationEvent event, ApplicationInitializationState currentState) async* {
 
     if (!currentState.isInitialized){
       yield ApplicationInitializationState.notInitialized();
@@ -19,7 +18,7 @@ class ApplicationInitializationBloc
 
     if (event.type == ApplicationInitializationEventType.start) {
       for (int progress = 0; progress < 101; progress += 20){
-        await Future.delayed(const Duration(milliseconds: 300));
+        await Future.delayed(const Duration(milliseconds: 100));
         yield ApplicationInitializationState.progressing(progress);
       }
     }

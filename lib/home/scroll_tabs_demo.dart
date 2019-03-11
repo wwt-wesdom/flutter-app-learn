@@ -42,6 +42,7 @@ class _ScrollTabsDemoState extends State<ScrollTabsDemo> with SingleTickerProvid
   void initState() {
     super.initState();
     _controller = TabController(length: _allPages.length, vsync: this);
+
   }
 
   @override

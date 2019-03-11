@@ -4,9 +4,8 @@ class ApplicationInitializationEvent extends BlocEvent {
 
   final ApplicationInitializationEventType type;
 
-  ApplicationInitializationEvent({
-    this.type: ApplicationInitializationEventType.start,
-  }) : assert(type != null);
+  ApplicationInitializationEvent({this.type: ApplicationInitializationEventType.start,})
+      : assert(type != null);
 }
 
 enum ApplicationInitializationEventType {

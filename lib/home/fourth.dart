@@ -7,7 +7,7 @@ import 'dart:ui' as ui;
 import 'dart:core';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
+//import 'package:image_picker_saver/image_picker_saver.dart';
 import '../modal/toast.dart';
 class Fourth extends StatefulWidget {
   @override
@@ -39,11 +39,10 @@ class _FourthState extends State<Fourth> {
   }
 
   void saveImage() async {
-    var filePath = await ImagePickerSaver.saveFile(fileData: images[0]);
+    /*var filePath = await ImagePickerSaver.saveFile(fileData: images[0]);
     if(filePath != null){
       Toast.toast(context:context, msg:'保存成功');
-    }
-//    print(filePath);
+    }*/
   }
 
   showDialogFun(BuildContext context){
@@ -72,7 +71,7 @@ class _FourthState extends State<Fourth> {
       body: StoreConnector<AppState,Map>(
         converter: (store) {
           print( store.state.map);
-          var map = Map()..['theme'] = store.state.map;
+          var map = Map()..['theme'] = store.state.map..['id'] = 1;
           map['changeTheme'] = (color) {
             store.dispatch(ThemeAction('change_theme_color',color));
           };

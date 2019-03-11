@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import './../store/store.dart' show AppState;
-import '../store/reducer/userInfo_reducer.dart' show UserInfoAction;
-import '../modal/user_info.dart';
 import '../routers/application.dart';
 import '../modal/toast.dart' show Toast;
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'dart:async';
+
 class Five extends StatefulWidget {
   @override
   _FiveState createState() => _FiveState();
@@ -13,20 +12,42 @@ class Five extends StatefulWidget {
 
 class _FiveState extends State<Five> with TickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  void _showNotImplementedMessage(context) {
-    Navigator.pop(context); // Dismiss the drawer.
-    _scaffoldKey.currentState.showSnackBar(const SnackBar(
-        content: Text("The drawer's items don't do anything")
-    ));
-  }
+
   static copyToClipboard(String text,context){
     Clipboard.setData(new ClipboardData(text: text));
     Toast.toast(context: context,msg: '复制成功');
   }
+/// facebook login
+  ///
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
+  Future<Null> _login() async {
+    final FacebookLoginResult result = await facebookSignIn.logInWithReadPermissions(['email', 'public_profile']);
+    print(result);
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final FacebookAccessToken accessToken = result.accessToken;
+        print(accessToken.token);
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        print('Login cancelled by the user.');
+        break;
+      case FacebookLoginStatus.error:
+        print('Something went wrong with the login process.\n'
+            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        break;
+    }
+  }
+
+  Future<Null> _logOut() async {
+    await facebookSignIn.logOut();
+    print('Logged out.');
+  }
+
+
   @override
   void initState() {
-    super.initState();
     print("five");
+    super.initState();
   }
   @override
   Widget build(BuildContext context) {
@@ -50,14 +71,7 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
       appBar: AppBar(
         title: Text('five'),
       ),
-      /*drawer: new Drawer(
-            child: new Column(
-              children: <Widget>[
-                Text('lasdjflasdjflasdjfaflsdjf')
-              ],
-            ),
-          ),*/
-      body: Column(
+      body: new Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -93,38 +107,11 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
               ),
             ),
           ),
-      /*    Container(
-            width: 200,
-            child: RaisedButton(
-              onPressed: (){
-                changUserInfo(UserInfo(name: 'wwt',phone: '13888888888',age: '15'));
-              },
-              child: Center(
-                child: Text('切换电话号码',style: TextStyle(fontSize: 16),),
-              ),
-            ),
-          ),
-          Center(
-            child: Text(map['text']),
-          ),
-          Text(male),*/
-          FloatingActionButton(
+          new FloatingActionButton(
             onPressed: () {
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context){
-                    /* return new CustomScrollView(
-                          slivers: <Widget>[
-                            SliverList(
-                                delegate: new SliverChildBuilderDelegate(
-                                  (BuildContext context,int index){
-                                    return bottomList[index];
-                                  },
-                                  childCount: bottomList.length,
-                                ),
-                            )
-                          ],
-                        );*/
                     return new ListView.builder(
                       itemBuilder: (BuildContext context ,int index){
                         return bottomList[index];
@@ -243,6 +230,12 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                 onPressed: (){
                   Application.router.navigateTo(context, "/categories");
                 },
+              ),
+              new Container(width: 5.0,),
+              new RaisedButton(
+                color: Colors.blue,
+                child: Text('login',style: TextStyle(color: Colors.white)),
+                onPressed: _login,
               ),
             ],
           )

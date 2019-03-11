@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../api/index.dart';
+//import '../api/index.dart';
 import 'package:flutter_app/blocs/home__banner_block.dart';
 import 'package:dio/dio.dart';
 
@@ -9,13 +9,13 @@ class HorseHome extends StatefulWidget {
   _HorseHomeState createState() => _HorseHomeState();
 }
 //今日热销 Model
-class TodayHotSellItem {
+/*class TodayHotSellItem {
   final String img;
   final String title;
   final String earnMoney;
   final String price;
   TodayHotSellItem({this.img,this.title,this.earnMoney,this.price});
-}
+}*/
 //轮播图Widget
 Widget _swiperListItem(SwiperListItem item){
   return InkWell(
@@ -120,13 +120,12 @@ class _HorseHomeState extends State<HorseHome> {
     Image.asset('assets/images/food03.jpeg',fit: BoxFit.cover,)
   ];
   List<TodayHotSellItem> todayHotSell = [];
-  List<TodayHotSellItem> recommendList = [];
   HomeBanner bloc;
   void initState(){
     super.initState();
-    print("horse_home");
     bloc = HomeBanner();
     bloc.getBanner();
+    bloc.getRecommendList();
     _controller.addListener((){
       if(_controller.offset >= 500){
         if(showToTop){
@@ -142,8 +141,8 @@ class _HorseHomeState extends State<HorseHome> {
         }
       }
     });
-    getChengQunNewsList();
-    getRecommendList();
+//    getChengQunNewsList();
+//    getRecommendList();
   }
 
 // 今日热销数据获取
@@ -178,43 +177,6 @@ class _HorseHomeState extends State<HorseHome> {
       });
       setState(() {
         todayHotSell = todayHotSellList;
-      });
-    });*/
-  }
-// 为你推荐数据获取
-  void getRecommendList() async{
-    try {
-      Response response;
-      response = await Dio().get("http://www.wwtao.top/api/grid-list.json");
-      List<TodayHotSellItem> recommendDataList = [];
-      List data = response.data["data"];
-      data.forEach((item){
-        recommendDataList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"].toString() ));
-      });
-      if(!mounted) return;
-      setState(() {
-        recommendList = recommendDataList;
-      });
-    } catch (e){
-      print(e);
-    }
-   /* ApiConfig.getChengQunNewsList({
-      "topcate":"",
-      "subcate":"",
-      "page": 1,
-      "pageSize": 20,
-      "ptype":"",
-      "sort": "total_sales_des",
-      "favoritesId": 18901731
-    }).then( (res){
-      List<TodayHotSellItem> recommendDataList = [];
-      List data = res.data.data["data"]["data"];
-      data.forEach((item){
-        recommendDataList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"] ));
-      });
-      if(!mounted) return;
-      setState(() {
-        recommendList = recommendDataList;
       });
     });*/
   }
@@ -375,15 +337,28 @@ class _HorseHomeState extends State<HorseHome> {
             ),
           ),
           new Container(
-            child: new SliverGrid.count(
-              crossAxisCount: 2,
-              childAspectRatio: 0.64,
-              children: recommendList.map((product){
-                return _todayHotSellItem(product);
-              }).toList(),
+            child: new StreamBuilder(
+                stream: bloc.recommendListStream,
+                builder: ( BuildContext context,AsyncSnapshot<List<TodayHotSellItem>> snapshot){
+                  if(snapshot.data != null){
+                    return SliverGrid.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.64,
+                      children: snapshot.data.map((product){
+                        return _todayHotSellItem(product);
+                      }).toList(),
+                    );
+                  }else{
+                    return new SliverToBoxAdapter(
+                      child: Center(
+                        child: Text('暂无数据'),
+                      ),
+                    );
+                  }
+                }
             ),
           ),
-          new SliverGrid.count(
+          /*new SliverGrid.count(
             crossAxisCount: 2,
             childAspectRatio: 0.64,
             children: recommendList.map((product){
@@ -398,7 +373,7 @@ class _HorseHomeState extends State<HorseHome> {
                 return _todayHotSellItem(product);
               }).toList(),
             ),
-          )
+          )*/
         ],
       ),
       floatingActionButton: showToTop ? null : FloatingActionButton(

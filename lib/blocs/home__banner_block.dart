@@ -2,6 +2,7 @@ import 'package:rxdart/rxdart.dart';
 import 'dart:async';
 import 'dart:core';
 import 'package:flutter_app/api/index.dart';
+import 'package:dio/dio.dart';
 
 class SwiperListItem {
   final String imgUrl;
@@ -10,10 +11,22 @@ class SwiperListItem {
   SwiperListItem({this.imgUrl,this.id,this.adUrl});
 }
 
+class TodayHotSellItem {
+  final String img;
+  final String title;
+  final String earnMoney;
+  final String price;
+  TodayHotSellItem({this.img,this.title,this.earnMoney,this.price});
+}
+
 class HomeBanner {
   BehaviorSubject<List<SwiperListItem>> _homeBannerList = BehaviorSubject<List<SwiperListItem>>();
   Sink<List<SwiperListItem>> get _homeBannerSink => _homeBannerList.sink;
   Stream<List<SwiperListItem>> get homeBannerStream => _homeBannerList.stream;
+
+  BehaviorSubject<List<TodayHotSellItem>> _recommendList = BehaviorSubject<List<TodayHotSellItem>>();
+  Sink<List<TodayHotSellItem>> get _recommendListSink => _recommendList.sink;
+  Stream<List<TodayHotSellItem>> get recommendListStream => _recommendList.stream;
 
   Future getBanner() {
    return ApiConfig.getBannerList({
@@ -28,7 +41,24 @@ class HomeBanner {
     });
   }
 
+  void getRecommendList() async{
+    try {
+      Response response;
+      response = await Dio().get("http://www.wwtao.top/api/grid-list.json");
+      List<TodayHotSellItem> recommendDataList = [];
+      List data = response.data["data"];
+      data.forEach((item){
+        recommendDataList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"].toString() ));
+      });
+      print("============$recommendDataList==========");
+      _recommendListSink.add(recommendDataList);
+    } catch (e){
+      print(e);
+    }
+  }
+
   void dispose(){
     _homeBannerList.close();
+    _recommendList.close();
   }
 }
