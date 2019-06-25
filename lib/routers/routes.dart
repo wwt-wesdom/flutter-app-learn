@@ -22,6 +22,7 @@ class Routes {
   static String countIncrement = "/count-increment";
   static String horseHome = "/horse-home";
   static String homeScreen = "/home-screen";
+  static String item = "/item";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -47,5 +48,6 @@ class Routes {
     router.define(countIncrement, handler: countIncrementHandler);
     router.define(horseHome, handler: horseHomeHandler);
     router.define(homeScreen, handler: homeScreenHandler);
+    router.define(item, handler: itemHandler);
   }
 }

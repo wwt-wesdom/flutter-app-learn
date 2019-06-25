@@ -4,6 +4,7 @@ import '../modal/toast.dart' show Toast;
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'dart:async';
+import '../home/item.dart';
 
 class Five extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
   static final FacebookLogin facebookSignIn = new FacebookLogin();
   Future<Null> _login() async {
     final FacebookLoginResult result = await facebookSignIn.logInWithReadPermissions(['email', 'public_profile']);
-    print(result);
+    print(result.toString());
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final FacebookAccessToken accessToken = result.accessToken;
@@ -238,7 +239,19 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                 onPressed: _login,
               ),
             ],
-          )
+          ),
+          new Row(
+            children: <Widget>[
+              new RaisedButton(
+                color: Colors.blue,
+                child: Text('item',style: TextStyle(color: Colors.white)),
+                onPressed: (){
+                  Application.router.navigateTo(context, "/item");
+                },
+              ),
+            ],
+          ),
+          new Item()
         ],
       ),
     );
