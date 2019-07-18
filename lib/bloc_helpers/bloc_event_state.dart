@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_app/bloc_helpers/bloc_provider.dart';
+import 'dart:async' show Stream;
 
 abstract class BlocEvent extends Object {}
 abstract class BlocState extends Object {}

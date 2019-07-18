@@ -27,9 +27,11 @@ class Routes {
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-          print("ROUTE WAS NOT FOUND !!!");
-        });
-
+          return Container(
+            child: Text('router is not find'),
+          );
+        }
+     );
     router.define(articleDetail, handler: articleDetailHandler);
     router.define(five, handler: fiveHandler);
     router.define(categories, handler: categoriesHandler);

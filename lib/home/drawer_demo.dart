@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 const String _kAsset0 = 'assets/images/glnz.jpg';
 const String _kAsset1 = 'assets/images/glnz.jpg';
 const String _kAsset2 = 'assets/images/glnz.jpg';
-const String _kGalleryAssetsPackage = 'assets';
 
 class DrawerDemo extends StatefulWidget {
   static const String routeName = '/material/drawer';

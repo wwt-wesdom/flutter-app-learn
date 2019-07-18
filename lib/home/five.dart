@@ -38,11 +38,11 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
         break;
     }
   }
-
+/*
   Future<Null> _logOut() async {
     await facebookSignIn.logOut();
     print('Logged out.');
-  }
+  }*/
 
 
   @override

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import '../modal/conversation.dart' show SkyHorseList;
 import '../routers/application.dart';
 import 'dart:core';
-import 'package:dio/dio.dart';
-import 'dart:convert';
 import '../api/index.dart';
 class ModelChange {
   final data;
   ModelChange({this.data}):assert(data != null);
 }
+
 class HorseList extends StatefulWidget {
   @override
   _HorseListState createState() => _HorseListState();
@@ -16,11 +15,9 @@ class HorseList extends StatefulWidget {
 
 
 
-class _HorseListItem extends StatelessWidget {
-  _HorseListItem(SkyHorseList item) {
-    this.skyHorseList = item;
-  }
-  SkyHorseList skyHorseList;
+class HorseListItem extends StatelessWidget {
+  final SkyHorseList skyHorseList;
+  HorseListItem(this.skyHorseList);
   @override
   Widget build(BuildContext context) {
     /*   Widget imgBox = Stack(
@@ -29,7 +26,7 @@ class _HorseListItem extends StatelessWidget {
         Image.asset('assets/images/example.jpg',width: 200.0,height: 200.0,fit: BoxFit.cover,),
       ],
     );*/
-    Widget InkWellContainer = Container(
+    Widget inkWellContainer = Container(
       width: 50,
       height: 50,
       color: Colors.pink,
@@ -111,7 +108,7 @@ class _HorseListItem extends StatelessWidget {
           imgContainer,
           Container(height: 10.0,),
           Text(skyHorseList.time,style: TextStyle(fontSize: 12.0),),
-          InkWellContainer
+          inkWellContainer
         ],
       ),
     );
@@ -130,9 +127,6 @@ class _HorseListState extends State<HorseList> {
   }
 
   void dioText() {
-    /*Dio dio = Dio();
-    Response response = await dio.get("http://192.168.100.133:8099/api/theme/list.json?pageIndex=1&pageSize=10&sort=&orderBy=");
-    print(ModelChange(data: response.data["data"]).data);*/
     ApiConfig.getHorseList({
       "pageIndex":1,
       "pageSize": 10,
@@ -172,7 +166,7 @@ class _HorseListState extends State<HorseList> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context,int index){
-                  return _HorseListItem(mokSkyHorseList[index]);},
+                  return HorseListItem(mokSkyHorseList[index]);},
                 itemCount: mokSkyHorseList.length,
               ),
             ),
@@ -180,7 +174,7 @@ class _HorseListState extends State<HorseList> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                return _HorseListItem(mokSkyHorseList[index]);
+                return HorseListItem(mokSkyHorseList[index]);
               },
               childCount: mokSkyHorseList.length,
             ),

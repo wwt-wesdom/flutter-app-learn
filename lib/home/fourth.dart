@@ -7,8 +7,7 @@ import 'dart:ui' as ui;
 import 'dart:core';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
-//import 'package:image_picker_saver/image_picker_saver.dart';
-import '../modal/toast.dart';
+
 class Fourth extends StatefulWidget {
   @override
   _FourthState createState() => _FourthState();
@@ -81,7 +80,6 @@ class _FourthState extends State<Fourth> {
           void changeThemeColor(color) {
             map['changeTheme'](color);
           }
-          String international = map['theme']['international'];
           return Scaffold(
             body: ListView(
               children: <Widget>[

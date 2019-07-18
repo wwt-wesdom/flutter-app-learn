@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import '../constants.dart' show Constants,AppColors;
 import './conversation_page.dart';
-import './horse_list.dart';
 import './sliver_app_bar.dart';
-import './fourth.dart';
 import './five.dart';
 import '../routers/routes.dart';
 import '../routers/application.dart';
 import './horse_home.dart';
-import 'package:flutter_app/blocs/app_init/bloc_init_page.dart';
+import 'dart:async' show Future;
 enum ActionItems {
-  GROUP_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT,HELP
+  GROUP_CHAT,
+  ADD_FRIEND,QR_SCAN,
+  PAYMENT,HELP
 }
 class NavigationIconView {
   final BottomNavigationBarItem item;
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 //  拉下列表
-  _buildPopupMunuItem(int iconName, String title) {
+  /*_buildPopupMunuItem(int iconName, String title) {
     return Row(
       children: <Widget>[
         Icon(IconData(
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Text(title,style: TextStyle(color: const Color(AppColors.AppBarPopupMenuColor)))
       ],
     );
-  }
+  }*/
 
   Future<bool> _onWillPop() {
     return showDialog(

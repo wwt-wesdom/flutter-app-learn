@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async' show Future;
 class Toast {
   static OverlayEntry _overlayEntry; //toast靠它加到屏幕上
   static bool _showing = false; //toast是否正在showing

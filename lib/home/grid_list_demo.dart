@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import '../api/index.dart';
 import 'package:flutter_app/blocs/grid_list_bloc.dart';
+import 'dart:async' show Future;
 
 class GridListDemo extends StatefulWidget {
   @override
@@ -68,7 +68,7 @@ class _GridListDemoState extends State<GridListDemo> {
   bool noMoreData = true;
   bool loading = true;
   bool showToTop = false;
-  List<ProductItem> _productsTwo = [
+ /* List<ProductItem> _productsTwo = [
     ProductItem(
       name: 'Bueno Chocolate',
       asset: 'assets/images/food01.jpeg',
@@ -109,7 +109,7 @@ class _GridListDemoState extends State<GridListDemo> {
       name: 'Chocolate tree',
       asset: 'assets/images/food05.jpeg',
     ),
-  ];
+  ];*/
   int pageIndex = 1;
   ScrollController _controller = ScrollController();
 
@@ -199,6 +199,7 @@ class _GridListDemoState extends State<GridListDemo> {
   void toList() {
     var list = '["1","2"]';
     var decoded = json.decode(list);
+    print('decoded===$decoded');
   }
 
   @override

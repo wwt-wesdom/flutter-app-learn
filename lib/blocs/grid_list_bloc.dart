@@ -1,6 +1,8 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_app/api/index.dart';
 import 'dart:core';
+import 'dart:async' show Stream;
+
 class ProductItem {
   final String name;
   final String asset;
@@ -21,8 +23,8 @@ class GridList {
   Stream<ResMap> get gridListStream => _gridList.stream;
 
   BehaviorSubject<bool> _returnToTop = BehaviorSubject<bool>();
-  Sink<bool> get _returnToTopSink => _returnToTop.sink;
-  Stream<bool> get _returnToTopStream => _returnToTop.stream;
+//  Sink<bool> get _returnToTopSink => _returnToTop.sink;
+//  Stream<bool> get _returnToTopStream => _returnToTop.stream;
 
   List<ProductItem> gridList = [];
   Map resMap = {};
