@@ -194,7 +194,6 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                       ],
                     ),
                     onTap: (){
-                      print('asdflasd');
                     },
                   ),
                 )

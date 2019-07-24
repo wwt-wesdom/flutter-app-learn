@@ -45,7 +45,7 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
                 : Container(
               width: MediaQuery.of(context).size.width - 30,
               height: 200,
-              color: Colors.yellow,
+//              color: Colors.yellow,
             ),
           ),
           RaisedButton(

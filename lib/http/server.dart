@@ -24,22 +24,25 @@ class ReformatData {
 class _HttpServer {
   final dio = new Dio();
   _HttpServer() {
-    dio.options.baseUrl = "http://192.168.100.133:8099/api";
+    dio.options.baseUrl = "http://192.168.100.133:9777/api";
     dio.options.connectTimeout = 10000;
     dio.options.receiveTimeout = 10000;
     dio.interceptor.request.onSend = (Options options) {
       return options;
     };
     dio.interceptor.response.onSuccess = (Response response) {
-      return ReformatData(
+      print('response===${response.data}');
+      return response;
+      /*return ReformatData(
           status: response.data["status"],
           statusCode: response.data["statusCode"],
           success: response.data["success"],
           msg: response.data["msg"],
           data: response.data["data"],
-      );
+      );*/
     };
     dio.interceptor.response.onError = (DioError err) {
+      print('err=========$err');
       return err;
     };
   }

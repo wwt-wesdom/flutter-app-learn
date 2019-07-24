@@ -4,7 +4,7 @@ import '../modal/toast.dart' show Toast;
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'dart:async';
-import '../home/item.dart';
+import 'package:wwt_flutter_app/widgets/slider.dart';
 
 class Five extends StatefulWidget {
   @override
@@ -23,18 +23,13 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
   static final FacebookLogin facebookSignIn = new FacebookLogin();
   Future<Null> _login() async {
     final FacebookLoginResult result = await facebookSignIn.logInWithReadPermissions(['email', 'public_profile']);
-    print(result.toString());
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final FacebookAccessToken accessToken = result.accessToken;
-        print(accessToken.token);
         break;
       case FacebookLoginStatus.cancelledByUser:
-        print('Login cancelled by the user.');
         break;
       case FacebookLoginStatus.error:
-        print('Something went wrong with the login process.\n'
-            'Here\'s the error Facebook gave us: ${result.errorMessage}');
         break;
     }
   }
@@ -47,7 +42,6 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
 
   @override
   void initState() {
-    print("five");
     super.initState();
   }
   @override
@@ -61,7 +55,6 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
               title: new Text("Camera$i"),
             ),
             onTap: (){
-              print('Camera$i');
               Navigator.pop(context);
             },
           )
@@ -78,7 +71,6 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
         children: <Widget>[
           new InkWell(
             onTap: (){
-              print(_scaffoldKey.currentContext);
             },
             child: Semantics(
               button: true,
@@ -92,7 +84,6 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
                     height: 110.0,
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-//                          borderRadius: BorderRadius.circular(55.0),
                         color: Colors.yellow,
                         image: DecorationImage(
                             image: AssetImage('assets/images/glnz.jpg'),
@@ -125,131 +116,110 @@ class _FiveState extends State<Five> with TickerProviderStateMixin{
             foregroundColor: Colors.white,
             child: Text('点我'),
           ),
-          new Row(
-            children: <Widget>[
-              new Container(width: 5.0,),
-              new RaisedButton(
-                child: Text('TextField'),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/text-field");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                child: Text('Dialogs',style: TextStyle(color: Colors.red)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/dialogs-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                child: Text('Drawer',style: TextStyle(color: Colors.blue)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/drawer-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                child: Text('toast',style: TextStyle(color: Colors.blue)),
-                onPressed: (){
-                  Toast.toast(context:context,msg:'123456789',second: 500);
-
-                },
-              ),
-            ],
-          ),
-          new Row(
-            children: <Widget>[
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.black,
-                child: Text('scrollTabsDemo',style: TextStyle(color: Colors.yellow)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/scroll-tabs-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.black,
-                child: Text('gridListDemo',style: TextStyle(color: Colors.blue)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/grid-list-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.black,
-                child: Text('clipboardData',style: TextStyle(color: Colors.green)),
-                onPressed: (){
-                  copyToClipboard('bainana',context);
-                },
-              ),
-            ],
-          ),
-          new Row(
-            children: <Widget>[
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.pink,
-                child: Text('sharedPreferences',style: TextStyle(color: Colors.white)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/shared-preferences-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.pink,
-                child: Text('videoPlayer',style: TextStyle(color: Colors.white)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/video-player-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.pink,
-                child: Text('animation',style: TextStyle(color: Colors.white)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/animation-demo");
-                },
-              )
-            ],
-          ),
-          new Row(
-            children: <Widget>[
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.blue,
-                child: Text('countBloc',style: TextStyle(color: Colors.white)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/count-bloc-demo");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.blue,
-                child: Text('categoies',style: TextStyle(color: Colors.white)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/categories");
-                },
-              ),
-              new Container(width: 5.0,),
-              new RaisedButton(
-                color: Colors.blue,
-                child: Text('login',style: TextStyle(color: Colors.white)),
-                onPressed: _login,
-              ),
-            ],
-          ),
-          new Row(
-            children: <Widget>[
-              new RaisedButton(
-                color: Colors.blue,
-                child: Text('item',style: TextStyle(color: Colors.white)),
-                onPressed: (){
-                  Application.router.navigateTo(context, "/item");
-                },
-              ),
-            ],
+          new Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Wrap(
+              direction: Axis.horizontal,
+              alignment: WrapAlignment.start,
+              runAlignment: WrapAlignment.start,
+              spacing: 5.0,
+              runSpacing: 0.0,
+              children: <Widget>[
+                new RaisedButton(
+                  child: Text('TextField'),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/text-field");
+                  },
+                ),
+                new RaisedButton(
+                  child: Text('Dialogs',style: TextStyle(color: Colors.red)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/dialogs-demo");
+                  },
+                ),
+                new RaisedButton(
+                  child: Text('Drawer',style: TextStyle(color: Colors.blue)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/drawer-demo");
+                  },
+                ),
+                new RaisedButton(
+                  child: Text('toast',style: TextStyle(color: Colors.blue)),
+                  onPressed: (){
+                    Toast.toast(context:context,msg:'123456789',second: 500);
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.black,
+                  child: Text('scrollTabsDemo',style: TextStyle(color: Colors.yellow)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/scroll-tabs-demo");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.black,
+                  child: Text('gridListDemo',style: TextStyle(color: Colors.blue)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/grid-list-demo");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.black,
+                  child: Text('clipboardData',style: TextStyle(color: Colors.green)),
+                  onPressed: (){
+                    copyToClipboard('bainana',context);
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.pink,
+                  child: Text('sharedPreferences',style: TextStyle(color: Colors.white)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/shared-preferences-demo");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.pink,
+                  child: Text('videoPlayer',style: TextStyle(color: Colors.white)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/video-player-demo");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.pink,
+                  child: Text('animation',style: TextStyle(color: Colors.white)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/animation-demo");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.blue,
+                  child: Text('countBloc',style: TextStyle(color: Colors.white)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/count-bloc-demo");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.blue,
+                  child: Text('categoies',style: TextStyle(color: Colors.white)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/categories");
+                  },
+                ),
+                new RaisedButton(
+                  color: Colors.blue,
+                  child: Text('login',style: TextStyle(color: Colors.white)),
+                  onPressed: _login,
+                ),
+                new RaisedButton(
+                  color: Colors.blue,
+                  child: Text('item',style: TextStyle(color: Colors.white)),
+                  onPressed: (){
+                    Application.router.navigateTo(context, "/item");
+                  },
+                ),
+              ],
+            ),
           ),
           new Item()
         ],

@@ -153,7 +153,6 @@ class _HorseListState extends State<HorseList> {
   var a = 15;
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('HorseList'),

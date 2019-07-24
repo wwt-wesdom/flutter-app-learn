@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
 import 'dart:core';
-import 'package:flutter_app/api/index.dart';
+import 'package:wwt_flutter_app/api/index.dart';
 import 'package:dio/dio.dart';
 
 class SwiperListItem {
@@ -44,14 +44,13 @@ class HomeBanner {
   void getRecommendList() async{
     try {
       Response response;
-      response = await Dio().get("http://www.wwtao.top/api/grid-list.json");
-      List<TodayHotSellItem> recommendDataList = [];
-      List data = response.data["data"];
-      data.forEach((item){
+      response = await ApiConfig.getAllSysConfig();
+      print(response);
+//      List<TodayHotSellItem> recommendDataList = [];
+     /* data.forEach((item){
         recommendDataList.add(TodayHotSellItem(img: item["picUrl"],title: item["title"],earnMoney:(item["couponRemainCount"] != null?item["couponRemainCount"] /100 : 0).toString(),price: item["zkFinalPrice"].toString() ));
-      });
-      print("============$recommendDataList==========");
-      _recommendListSink.add(recommendDataList);
+      });*/
+//      _recommendListSink.add(recommendDataList);
     } catch (e){
       print(e);
     }

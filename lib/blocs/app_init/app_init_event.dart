@@ -1,4 +1,4 @@
-import 'package:flutter_app/bloc_helpers/bloc_event_state.dart';
+import 'package:wwt_flutter_app/bloc_helpers/bloc_event_state.dart';
 
 class ApplicationInitializationEvent extends BlocEvent {
 

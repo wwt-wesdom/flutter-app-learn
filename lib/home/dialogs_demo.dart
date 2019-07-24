@@ -52,7 +52,6 @@ class _DialogsDemoState extends State<DialogsDemo> {
                   lastDate: new DateTime(2060)
                 ).then((DateTime value){
                   if(value != null){
-                    print(value);
                   }
                 });
               },

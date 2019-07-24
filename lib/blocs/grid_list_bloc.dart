@@ -1,5 +1,5 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter_app/api/index.dart';
+import 'package:wwt_flutter_app/api/index.dart';
 import 'dart:core';
 import 'dart:async' show Stream;
 

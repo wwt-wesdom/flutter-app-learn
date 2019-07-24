@@ -19,7 +19,6 @@ class _TextFieldPageState extends State<TextFieldPage> {
   getTime(){
     timerUtil.setOnTimerTickCallback((int value){
       if(DateTime.now().hour == 12 && DateTime.now().minute == 1 && DateTime.now().second == 1){
-        print("开始执行");
       }
 //      LogUtil.e("TimerTick:" + value.toString());
     });
@@ -91,13 +90,11 @@ class _TextFieldPageState extends State<TextFieldPage> {
                 prefixIcon: Icon(Icons.person)
               ),
               onChanged: (v){
-                print("onChange:$v");
               },
             ),
             Text("${timeDownCount}s"),
             new RaisedButton(
               onPressed: (){
-                print(_unameController.text);
                 getTime();
               },
               child: Text('确定:RaiseBtn'),
@@ -136,7 +133,6 @@ class _TextFieldPageState extends State<TextFieldPage> {
                 setState(() {
                   _switchSelected = value;
                 });
-                print(this._switchSelected);
               }
             ),
             new Checkbox(

@@ -102,14 +102,12 @@ const List<SkyHorseList> mokSkyHorseList = [
 ];
 var listData = [];
 void main(){
-  dioText();
+//  dioText();
 }
 dioText() async{
   Dio dio = Dio();
   Response response = await dio.get("http://192.168.100.133:8099/api/theme/list.json?pageIndex=1&pageSize=10&sort=&orderBy=");
-  print(response.data);
   listData = response.data.content;
-  print(listData);
   listData.forEach((item){
     mokSkyHorseList.add(SkyHorseList(
       title: item.content,

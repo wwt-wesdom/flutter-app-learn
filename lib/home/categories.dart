@@ -42,7 +42,6 @@ class _CategoriesState extends State<Categories> {
     imageList.clear();
     for (var i = 0; i < length; i++) {
       imageList.add(Container(
-        color: Colors.yellow,
         child: Column(
           children: <Widget>[
             Image.asset('assets/images/glnz.jpg',fit: BoxFit.contain,),
@@ -156,17 +155,16 @@ class _CategoriesState extends State<Categories> {
                                   title: Text('更多精彩'),
                                   children: <Widget>[
                                     Container(
-                                      height: ((index+1)/3).ceil()*95.0,
-//                                      margin: EdgeInsets.all(5.0),
+                                      height: ((index+1)/3).ceil()*80.0,
                                       child: GridView.extent(
                                         maxCrossAxisExtent: (MediaQuery.of(context).size.width - 120)/3,
-//                                      padding: const EdgeInsets.all(4.0),
                                         children: imageList
                                       ),
                                     ),
                                   ],
                                   onExpansionChanged: (f){
                                     if(f){
+                                      print(((index+1)/3).ceil()*95.0);
                                       this.getList(index + 1);
                                     }
                                   },

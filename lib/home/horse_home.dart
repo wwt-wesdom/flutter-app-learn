@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 //import '../api/index.dart';
-import 'package:flutter_app/blocs/home__banner_block.dart';
+import 'package:wwt_flutter_app/blocs/home__banner_block.dart';
 import 'package:dio/dio.dart';
 
 class HorseHome extends StatefulWidget {
@@ -21,7 +21,6 @@ Widget _swiperListItem(SwiperListItem item){
   return InkWell(
     child: Image.network(item.imgUrl,fit: BoxFit.cover,),
     onTap: (){
-      print(item.adUrl);
     },
   );
 }
@@ -104,7 +103,6 @@ Widget _todayHotSellItem(item){
         ],
       ),
       onTap: (){
-        print('to goods details page');
       },
     ),
   );
@@ -159,7 +157,7 @@ class _HorseHomeState extends State<HorseHome> {
         todayHotSell = todayHotSellList;
       });
     } catch (e){
-      print(e);
+      print('e=====$e');
     }
     /*ApiConfig.getChengQunNewsList({
       "topcate":"",
@@ -205,7 +203,6 @@ class _HorseHomeState extends State<HorseHome> {
                 color: Colors.white,
                 child: InkWell(
                   onTap: (){
-                    print("search");
                   },
                   child: Row(
                     children: <Widget>[
@@ -271,7 +268,6 @@ class _HorseHomeState extends State<HorseHome> {
               child: InkWell(
                 child: Image.network("https://taoke-prod.oss-cn-hangzhou.aliyuncs.com/home/new-course.png" ,fit: BoxFit.cover,),
                 onTap: () {
-                  print("how to earn money");
                 },
               ),
             ),
@@ -292,7 +288,6 @@ class _HorseHomeState extends State<HorseHome> {
                     child: InkWell(
                       child: Icon(Icons.arrow_forward_ios,color: Colors.grey,),
                       onTap: (){
-                        print("今日热销");
                       },
                     ),
                   )

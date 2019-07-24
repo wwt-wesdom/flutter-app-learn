@@ -1,6 +1,6 @@
-import 'package:flutter_app/bloc_helpers/bloc_event_state.dart';
-import 'package:flutter_app/blocs/app_init/app_init_state.dart';
-import 'package:flutter_app/blocs/app_init/app_init_event.dart';
+import 'package:wwt_flutter_app/bloc_helpers/bloc_event_state.dart';
+import 'package:wwt_flutter_app/blocs/app_init/app_init_state.dart';
+import 'package:wwt_flutter_app/blocs/app_init/app_init_event.dart';
 import 'dart:async' show Stream;
 
 class ApplicationInitializationBloc

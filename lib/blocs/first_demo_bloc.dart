@@ -10,7 +10,6 @@ class CountBLoC {
 
   void increment(){
     value.add(++_count);
-    print(_count);
   }
 
   void dispose() {

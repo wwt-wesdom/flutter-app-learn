@@ -27,7 +27,6 @@ class _FourthState extends State<Fourth> {
       Uint8List pngBytes = byteData.buffer.asUint8List();
       images.clear();
       images.add(pngBytes);
-      print(images[0]);
       this.showDialogFun(context);
       setState(() {});
       return pngBytes;

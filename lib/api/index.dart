@@ -11,8 +11,8 @@ abstract class ApiConfig {
     return HttpServerFactory.getHttp().get("/user/getBanner.json",pragma);
   }
 
-  static getChengQunNewsList(pragma) {
-    return HttpServerFactory.getHttp().get("/coupon/chengqun-news.json",pragma);
+  static getAllSysConfig() {
+    return HttpServerFactory.getHttp().get("/user/get-sys-config-all");
   }
 
 

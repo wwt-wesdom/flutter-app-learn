@@ -43,7 +43,6 @@ class _SharedPreferencesDemoState extends State<SharedPreferencesDemo> {
               ),
               new RaisedButton(
                 onPressed: (){
-                  print(_unameController.text);
                   save();
                 },
                 color: Colors.blue,
@@ -61,7 +60,6 @@ class _SharedPreferencesDemoState extends State<SharedPreferencesDemo> {
                     setState(() {
                       initText = userName;
                     });
-                    print(userName);
                   }
                   );
                 },

@@ -18,7 +18,7 @@ import '../home/count_bloc_demo.dart';
 import '../home/count_increment.dart';
 import '../home/horse_home.dart';
 import '../home/home_screen.dart';
-import '../home/item.dart';
+import 'package:wwt_flutter_app/widgets/slider.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {

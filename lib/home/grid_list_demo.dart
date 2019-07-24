@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../api/index.dart';
-import 'package:flutter_app/blocs/grid_list_bloc.dart';
+import 'package:wwt_flutter_app/blocs/grid_list_bloc.dart';
 import 'dart:async' show Future;
 
 class GridListDemo extends StatefulWidget {
@@ -214,7 +214,6 @@ class _GridListDemoState extends State<GridListDemo> {
     return StreamBuilder(
         stream: bloc.gridListStream,
         builder: (BuildContext context, AsyncSnapshot<ResMap> snapshot) {
-          print(snapshot.data != null ? snapshot.data.goTop : null);
           return new Scaffold(
             appBar: AppBar(
               title: Text('GridListDemo'),

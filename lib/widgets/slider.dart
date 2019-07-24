@@ -80,8 +80,8 @@ class ItemState extends State<Item> {
                 },
                 onTap: () {
                   if (right == 0) return;
-                  _timer = new Timer.periodic(Duration(milliseconds: 1), (Timer timer) {
-                    right = right - 1;
+                  _timer = new Timer.periodic(Duration(microseconds: 500), (Timer timer) {
+                    right = right - 0.5;
                     setState(() {
                     });
                     if (right == 0) {
