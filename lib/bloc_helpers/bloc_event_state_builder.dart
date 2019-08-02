@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wwt_flutter_app/bloc_helpers/bloc_event_state.dart';
+import 'package:wwt/bloc_helpers/bloc_event_state.dart';
 typedef Widget AsyncBlocEventStateBuilder<BlocState>(BuildContext context, BlocState state);
 
 class BlocEventStateBuilder<BlocEvent,BlocState> extends StatelessWidget {

@@ -1,24 +1,24 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import '../home/router_change_example.dart';
-import '../home/five.dart';
-import '../home/categories.dart';
-import '../home/six.dart';
-import '../home/sliver_header.dart';
-import '../home/sliver_app_bar.dart';
-import '../home/text_field.dart';
-import '../home/dialogs_demo.dart';
-import '../home/drawer_demo.dart';
-import '../home/scroll_tabs_demo.dart';
-import '../home/grid_list_demo.dart';
-import '../home/shared_preferences_demo.dart';
-import '../home/video_player_demo.dart';
-import '../home/animation_demo.dart';
-import '../home/count_bloc_demo.dart';
-import '../home/count_increment.dart';
-import '../home/horse_home.dart';
-import '../home/home_screen.dart';
-import 'package:wwt_flutter_app/widgets/slider.dart';
+import 'package:wwt/pages/router_change_example.dart';
+import 'package:wwt/pages/five.dart';
+import 'package:wwt/pages/categories.dart';
+import 'package:wwt/pages/six.dart';
+import 'package:wwt/pages/sliver_header.dart';
+import 'package:wwt/pages/sliver_app_bar.dart';
+import 'package:wwt/pages/text_field.dart';
+import 'package:wwt/pages/dialogs_demo.dart';
+import 'package:wwt/pages/drawer_demo.dart';
+import 'package:wwt/pages/scroll_tabs_demo.dart';
+import 'package:wwt/pages/grid_list_demo.dart';
+import 'package:wwt/pages/shared_preferences_demo.dart';
+import 'package:wwt/pages/video_player_demo.dart';
+import 'package:wwt/pages/animation_demo.dart';
+import 'package:wwt/pages/count_bloc_demo.dart';
+import 'package:wwt/pages/count_increment.dart';
+import 'package:wwt/pages/horse_home.dart';
+import 'package:wwt/pages/home_screen.dart';
+import 'package:wwt/widgets/slider.dart';
 
 Handler articleDetailHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {

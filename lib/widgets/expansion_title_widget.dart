@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:wwt_flutter_app/utils/index.dart' show AppColors;
+import 'package:wwt/utils/index.dart' show AppColors;
 const Duration _kExpand = Duration(milliseconds: 200);
 
 class ExpansionTileWidget extends StatefulWidget {

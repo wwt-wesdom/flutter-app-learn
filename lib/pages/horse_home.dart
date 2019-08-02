@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 //import '../api/index.dart';
-import 'package:wwt_flutter_app/blocs/home__banner_block.dart';
+import 'package:wwt/blocs/home__banner_block.dart';
 import 'package:dio/dio.dart';
 
 class HorseHome extends StatefulWidget {

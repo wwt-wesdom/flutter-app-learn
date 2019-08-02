@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wwt_flutter_app/blocs/bloc_provider.dart';
+import 'package:wwt/blocs/bloc_provider.dart';
 
 
 class CountIncrement extends StatelessWidget {

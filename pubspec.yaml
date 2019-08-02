@@ -1,4 +1,4 @@
-name: wwt_flutter_app
+name: wwt
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -28,6 +28,7 @@ dependencies:
   video_player: ^0.8.0
   rxdart: ^0.20.0
   flutter_facebook_login: ^2.0.0
+  provider: ^3.0.0+1
 
 
 dev_dependencies:

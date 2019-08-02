@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
 import 'dart:core';
-import 'package:wwt_flutter_app/api/index.dart';
+import 'package:wwt/api/index.dart';
 import 'package:dio/dio.dart';
 
 class SwiperListItem {

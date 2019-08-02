@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wwt_flutter_app/blocs/bloc_provider.dart';
-import 'package:wwt_flutter_app/blocs/app_init/bloc_init_page.dart';
+import 'package:wwt/blocs/bloc_provider.dart';
+import 'package:wwt/blocs/app_init/bloc_init_page.dart';
 //import 'package:flutter_jpush/flutter_jpush.dart';
 
 void main() => runApp(MyApp());

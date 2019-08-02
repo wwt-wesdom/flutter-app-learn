@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'bloc_init_bloc.dart';
 import 'app_init_event.dart';
 import 'app_init_state.dart';
-import 'package:wwt_flutter_app/bloc_helpers/bloc_event_state_builder.dart';
+import 'package:wwt/bloc_helpers/bloc_event_state_builder.dart';
 ///router
 import 'package:fluro/fluro.dart';
-import 'package:wwt_flutter_app/routers/application.dart';
-import 'package:wwt_flutter_app/routers/routes.dart';
+import 'package:wwt/routers/application.dart';
+import 'package:wwt/routers/routes.dart';
 
 class InitializationPage extends StatefulWidget {
   @override

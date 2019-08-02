@@ -4,7 +4,7 @@ import '../modal/toast.dart' show Toast;
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'dart:async';
-import 'package:wwt_flutter_app/widgets/slider.dart';
+import 'package:wwt/widgets/slider.dart';
 
 class Five extends StatefulWidget {
   @override

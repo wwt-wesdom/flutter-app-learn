@@ -1,1 +1,1 @@
-export 'package:wwt_flutter_app/utils/styles.dart';
+export 'package:wwt/utils/styles.dart';

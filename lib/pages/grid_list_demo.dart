@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../api/index.dart';
-import 'package:wwt_flutter_app/blocs/grid_list_bloc.dart';
+import 'package:wwt/blocs/grid_list_bloc.dart';
 import 'dart:async' show Future;
 
 class GridListDemo extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wwt_flutter_app/blocs/bloc_provider.dart';
-import 'package:wwt_flutter_app/routers/application.dart';
+import 'package:wwt/blocs/bloc_provider.dart';
+import 'package:wwt/routers/application.dart';
 
 class CountBlocDemo extends StatelessWidget {
   @override
