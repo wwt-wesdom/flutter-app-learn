@@ -6,7 +6,6 @@ class CountIncrement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('under Page'),

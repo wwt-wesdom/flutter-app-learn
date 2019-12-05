@@ -2,8 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:wwt/blocs/bloc_provider.dart';
 import 'package:wwt/blocs/app_init/bloc_init_page.dart';
 //import 'package:flutter_jpush/flutter_jpush.dart';
+import 'package:wwt/pages/providerDemo/provider_one.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  final counter = CounterModel();
+  final textSize = 48;
+  runApp(
+    Provider<int>.value(
+      value: textSize,
+      child: ChangeNotifierProvider.value(
+        value: counter,
+        child: MyApp(),
+      )
+    )
+  );
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -80,7 +94,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocProvider(
       child: MaterialApp(
-        title: '微信',
+        title: 'wwt',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           cardColor: Colors.white,

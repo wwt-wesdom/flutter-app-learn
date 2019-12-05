@@ -116,6 +116,9 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
         });
       }
     });
+    const b = 1;
+    const List a = [b,2,3];
+
   }
   @override
   void dispose() {
@@ -126,28 +129,20 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _controller,
-      slivers: <Widget>[
-        new SliverAppBar(
+    return Scaffold(
+      body: CustomScrollView(
+        controller: _controller,
+        slivers: <Widget>[
+          new SliverAppBar(
 //          控制tab是否消失
-          pinned: true,
-          title: new Container(
-            color: Colors.white10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-               /* new Offstage(
-                  offstage: showToTopBtn,
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text('club factory',style: TextStyle(fontSize: 16.0),),
-                    ],
-                  ),
-                ),*/
-                new AnimatedContainer(
+            pinned: true,
+            title: new Container(
+              color: Colors.white10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  /* new AnimatedContainer(
                   height: showToTopBtn?0.0:20.0,
                   duration: Duration(milliseconds: 300),
                   child: new Row(
@@ -156,33 +151,32 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                       Text('club factory',style: TextStyle(fontSize: 16.0),),
                     ],
                   ),
-                ),
-//                 Text('sliverAppBar'),
-                new Container(
-                  height: 25.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    border: Border.all(
-                      width: 1.0,
-                      color: Colors.yellow
+                ),*/
+                  new Container(
+                    height: 25.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      border: Border.all(
+                          width: 1.0,
+                          color: Colors.yellow
+                      ),
+                      color: Colors.grey.shade50,
                     ),
-                    color: Colors.grey.shade50,
-                  ),
-                  child: new InkWell(
-                    child: Row(
-                     /* mainAxisAlignment: MainAxisAlignment.center,
+                    child: new InkWell(
+                      child: Row(
+                        /* mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,*/
-                      children: <Widget>[
-                        new Padding(
-                          padding: EdgeInsets.only(right: 8.0,left: 30.0),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                            size: 20.0,
+                        children: <Widget>[
+                          new Padding(
+                            padding: EdgeInsets.only(right: 8.0,left: 30.0),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                              size: 20.0,
+                            ),
                           ),
-                        ),
-                        new Text('search category',style: TextStyle(fontSize: 14.0,color: Colors.grey),),
-                       /* new Expanded(
+                          new Text('search category',style: TextStyle(fontSize: 14.0,color: Colors.grey),),
+                          /* new Expanded(
                             child: TextField(
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
@@ -191,37 +185,37 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
                                   hintStyle: TextStyle(color: Colors.white)),
                               cursorColor: Colors.white,
                         ))*/
-                      ],
+                        ],
+                      ),
+                      onTap: (){
+                      },
                     ),
-                    onTap: (){
-                    },
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          expandedHeight: 200.0,
-          flexibleSpace: new FlexibleSpaceBar(
+            backgroundColor: Theme.of(context).accentColor,
+            expandedHeight: 200.0,
+            flexibleSpace: new FlexibleSpaceBar(
 //            background: Image.asset('assets/images/food01.jpeg',fit: BoxFit.cover,),
-            background: Container(
-              height: 200.0,
-              child: Swiper(
-                autoplay: true,
-                itemCount: 3,
-                itemBuilder: (BuildContext context,int index){
-                  return imgListSwiper[index];
-                },
-                pagination: new SwiperPagination(
-                  builder: DotSwiperPaginationBuilder(
+              background: Container(
+                height: 200.0,
+                child: Swiper(
+                  autoplay: true,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context,int index){
+                    return imgListSwiper[index];
+                  },
+                  pagination: new SwiperPagination(
+                      builder: DotSwiperPaginationBuilder(
                         color: Colors.black54,
                         activeColor: Colors.white,
-                )),
+                      )),
+                ),
               ),
             ),
           ),
-        ),
-        new SliverFixedExtentList(
+          new SliverFixedExtentList(
             delegate: SliverChildListDelegate(
               _products.map((product){
                 return _buildItemList(product);
@@ -229,8 +223,9 @@ class _SliverAppbarPageState extends State<SliverAppbarPage> {
             ),
             itemExtent: 100,
 
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
   Widget _buildItemList(ProductItem product) {
